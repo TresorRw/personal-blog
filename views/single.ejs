@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/cf03def005.js" crossorigin="anonymous"></script>
+  <link rel="shortcut icon" href="assets/apple-touch-icon.png" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+  <div id="pickedID" class="<%= post %>"></div>
+  <header id="top" class="scrolled">
+    <a href="/" class="nav-logo">Tresor</a>
+    <ul id="linkManager"></ul>
+    <div class="togglerIcon" id="navIcon">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </header>
+  <div class="menuTog" id="mn"></div>
+  <section class="singleView">
+    <div class="blogContent"></div>
+    <div class="blogComment">
+      <h2>Comments</h2>
+      <div class="comments">
+        <div id="cms"></div>
+        <div class="comment" id="no-user">
+          <form id="commentForm">
+            <input type="hidden" name="post" id="postId" />
+            <input type="text" name="txt" id="com" required placeholder="How do you see it?" />
+            <button id="addComment" type="submit">
+              <i class="fa-regular fa-paper-plane"></i>
+            </button>
+          </form>
+          <p class="log"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="js/renderPost.js"></script>
+  <script>
+    let user = document.cookie;
+    let post_id = document.querySelector("#pickedID").className;
+    document.getElementById("postId").value = post_id;
+    let singleView = document.querySelector(".blogContent");
+    let isAvailable = (display = false);
+    document.addEventListener("DOMContentLoaded", async (e) => {
+      let renderedPosts = await fetchAllArticles();
+      for (let i = 0; i < renderedPosts.length; i++) {
+        let single = renderedPosts[i];
+        if (single._id == post_id) {
+          display = true;
+          document.title = `${single.title} || Blog`;
+          singleView.innerHTML = `
+              <h2>${single.title}</h2>
+              <p>By <b>Admin</b></p>
+              <p><small> ${single.postDate}</small></p>
+              <img src="${single.postImage}" alt="Blog post">
+              <p>${single.content}</p>`;
+          break;
+        } else {
+          isAvailable = false;
+        }
+      }
+    });
+    let header = document.getElementById("top");
+    let mn = document.getElementById("mn");
+
+    let commentView = document.querySelector(".comments");
+
+    let navIcon = document.getElementById("navIcon");
+    navIcon.addEventListener("click", () => {
+      mn.classList.toggle("show");
+    });
+
+    if (display === false) {
+      singleView.innerHTML = `<img src="assets/notfound.png">`;
+      document.querySelector('.blogComment').style.display = 'none'
+    } else {
+      document.querySelector('.blogComment').style.display = 'block'
+    }
+    if (user.includes('pbtkn') == true) {
+      mn.innerHTML = `<a href="/logout" style="color: red;">Logout</a>`;
+      linkManager.innerHTML = `<li><a href="/logout" >Logout</a></li>`;
+    } else {
+      mn.innerHTML = `
+              <a href="/#main">Home</a>
+              <a href="/#why">Why me?</a>
+              <a href="/#who-am-i">About</a>
+              <a href="/#sign-in">Sign in</a>
+              <a href="/blog">Blog</a>
+              <a href="/#contact">Contact</a>
+          `;
+      linkManager.innerHTML = `<li><a onclick="defaultLoad()" href="/">Home</a></li>
+          <li><a href="/#why">Why me?</a></li>
+          <li><a href="/#who-am-i">About me</a></li>
+          <li class="active"><a href="/blog">Blog</a></li>
+          <li><a href="/#sign-in">Sign in</a></li>
+          <li class="special"><a href="/#contact">Send inquiry</a></li>`;
+    }
+  </script>
+  <script>
+    const addComment = document.getElementById("addComment");
+    let commentSection = document.getElementById('cms')
+    const comForm = document.getElementById("commentForm");
+    comForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const postid = comForm.post.value;
+      const cmTxt = comForm.txt.value;
+      const request = await fetch("/comment", {
+        method: "POST",
+        body: JSON.stringify({
+          post_id: postid,
+          commentText: cmTxt,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const response = await request.json();
+      document.querySelector(".log").innerHTML = await response.message;
+      if ((await response.status) == 201) {
+        setTimeout(async () => {
+          document.querySelector(".log").innerHTML = "";
+          comForm.txt.value = "";
+          await displayComments();
+        }, 2000);
+      }
+    });
+    document.addEventListener("DOMContentLoaded", async (e) => {
+      await displayComments();
+    });
+    const displayComments = async () => {
+      commentSection.innerHTML = '';
+      const allComments = await fetchAllArticlesComment(post_id);
+      const comments = await allComments.comments;
+      comments.map((com, inx) => {
+        commentSection.innerHTML += `
+        <div class="comment">
+            <h6><i class="fa-solid fa-user"></i> ${com.names}</h6>
+            <p>${com.message}</p>
+          </div>
+        `;
+      })
+    }
+  </script>
+</body>
+</html>
