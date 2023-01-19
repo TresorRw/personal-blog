@@ -502,8 +502,8 @@ router.post('/profile', authUser, routesController.saveProfile);
 // liking and commenting
 router.post("/like", allowUser, routesController.like_post);
 router.post("/comment", allowUser, routesController.comment_post);
-router.get("/getAllPostsLikes", authUser, routesController.getLikes);
-router.get("/getAllComments", authUser, routesController.getComments);
+router.get("/getAllPostsLikes", routesController.getLikes);
+router.get("/getAllComments", routesController.getComments);
 
 /* Modification on posts */
 // Deleting
