@@ -54,6 +54,7 @@
         let single = renderedPosts[i];
         if (single._id == post_id) {
           display = true;
+          document.querySelector('.blogComment').style.visibility = 'visible'
           document.title = `${single.title} || Blog`;
           singleView.innerHTML = `
               <h2>${single.title}</h2>
@@ -79,10 +80,8 @@
 
     if (display === false) {
       singleView.innerHTML = `<img src="assets/notfound.png">`;
-      document.querySelector('.blogComment').style.display = 'none'
-    } else {
-      document.querySelector('.blogComment').style.display = 'block'
-    }
+      document.querySelector('.blogComment').style.visibility = 'hidden'
+    } 
     if (user.includes('pbtkn') == true) {
       mn.innerHTML = `<a href="/logout" style="color: red;">Logout</a>`;
       linkManager.innerHTML = `<li><a href="/logout" >Logout</a></li>`;
