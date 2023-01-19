@@ -6,7 +6,11 @@ const { authUser } = require("./middleware/userStatus");
 const swaggerUI = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
 const dotenv = require('dotenv').config();
-
+/*
+Servers
+https://tresor-blog.up.railway.app/ 
+http://localhost:5000
+*/
 const options = {
   definition: {
     openapi: "3.0.0",
@@ -17,7 +21,7 @@ const options = {
     }, 
     servers: [
       {
-        url: 'http://localhost:5000'
+        url: process.env.DOC_SERVER
       }
     ]
   },
@@ -36,10 +40,8 @@ app.use(cp());
 // Template engine
 app.set("view engine", "ejs");
 
-// mongodb+srv://brand:brandcluster@cluster0.objkfm6.mongodb.net/personalBrand
-// mongodb://127.0.0.1:27017/personalBrand
 mongoose
-  .connect("mongodb://127.0.0.1:27017/personalBrand", {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
