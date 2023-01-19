@@ -1,0 +1,295 @@
+<%- include('partials/header'); %>
+<title>Home :: MY Brand</title>
+</head>
+
+<body id="body">
+    <%- include('partials/nav') %>
+    <div class="main-page">
+        <section class="w-100 flex content-center" id="main">
+            <div class="bg_image w-25">
+                <img src="assets/Profile 2 PNG.png" alt="Homepage Profile image">
+            </div>
+            <div class="bg_info w-50">
+                <h3>Hello There!</h3>
+                <h1>I'M Tresor</h1>
+                <h5>Software Developer</h5>
+                <div class="addresss">
+                    <p><span class="fa-solid fa-location-dot"></span> Kicukiro, Kigali, Rwanda</p>
+                    <p><span class="fa-solid fa-phone"></span> <a href="tel:+250790904527"> +250 790 904 527</a>
+                    </p>
+                    <p><span class="fa-solid fa-envelope"></span> <a href="mailto:alaintresocyusa683@gmail.com">
+                            alaintresorcyusa683@gmail.com</a></p>
+                </div>
+                <div class="social_icons">
+                    <a target="_blank" href="https://www.facebook.com/cyusaalaintresor01/"><i
+                            class="fa-brands fa-facebook-f"></i></a>
+                    <a target="_blank" href="https://discord.gg/TkjJDprcxm"><i class="fa-brands fa-discord"></i></a>
+                    <a target="_blank" href="https://www.twitter.com/TresorRw/"><i class="fa-brands fa-twitter"></i></a>
+                    <a target="_blank" href="https://t.me/TresorRw"><i class="fa-brands fa-telegram"></i></a>
+                    <a target="_blank" href="https://www.linkedin.com/in/catresor/"><i
+                            class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </section>
+        <section id="why" class="bg-white flex align-center content-center">
+            <div class="skills w-50">
+                <div class="progress w-75">
+                    <p class="p_title">HTML</p>
+                    <div class="parent">
+                        <div class="child w-80"></div>
+                    </div>
+                </div>
+                <div class="progress w-75">
+                    <p class="p_title">CSS</p>
+                    <div class="parent">
+                        <div class="child w-65"></div>
+                    </div>
+                </div>
+                <div class="progress w-75">
+                    <p class="p_title">JS</p>
+                    <div class="parent">
+                        <div class="child w-55"></div>
+                    </div>
+                </div>
+                <div class="progress w-75">
+                    <p class="p_title">SEO</p>
+                    <div class="parent">
+                        <div class="child w-25"></div>
+                    </div>
+                </div>
+                <div class="progress w-75">
+                    <p class="p_title">Bootstrap</p>
+                    <div class="parent">
+                        <div class="child w-75"></div>
+                    </div>
+                </div>
+                <div class="progress w-75">
+                    <p class="p_title">jQuery</p>
+                    <div class="parent">
+                        <div class="child w-55"></div>
+                    </div>
+                </div>
+                <div class="progress w-75">
+                    <p class="p_title">PHP</p>
+                    <div class="parent">
+                        <div class="child w-65"></div>
+                    </div>
+                </div>
+                <div class="progress w-75">
+                    <p class="p_title">MySQL</p>
+                    <div class="parent">
+                        <div class="child w-55"></div>
+                    </div>
+                </div>
+                <div class="progress w-75">
+                    <p class="p_title">NodeJS</p>
+                    <div class="parent">
+                        <div class="child w-40"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="boadrs w-40 flex content-center">
+                <div class="board">
+                    <h2>2+ <br><span>Years</span></h2>
+                </div>
+                <div class="board">
+                    <h2>7+ <br><span>Tools</span></h2>
+                </div>
+                <div class="board">
+                    <h2>7+ <br><span>Projects</span></h2>
+                </div>
+            </div>
+        </section>
+        <section id="who-am-i" class="bg-white flex align-center content-center">
+            <div class="bg_image w-25">
+                <img src="assets/Profile 2 PNG.png" alt="Homepage Profile image">
+            </div>
+            <div class="more_info w-65">
+                <h4>More about <span>Tresor</span></h4>
+                <p>Alain Tresor CYUSA is an enthusiastic world class software developer with vision of solving
+                    most
+                    daily life problems that society is facing with.</p>
+                <br>
+                <p id="ls">I'm an experienced software developer who constantly seeks out innovative solutions
+                    to
+                    everyday problems.</p>
+                <a target="_blank" href="https://tresor-cv.vercel.app/CYUSA%20Alain%20Tresor%20-CV.pdf" download
+                    class="btn-download">Download CV <span class="fa-solid fa-download"></span> </a>
+            </div>
+        </section>
+        <section id="sign-in" class="bg-white flex align-center space-between">
+            <div class="skills w-40">
+                <h3>SIGN INTO YOUR ACCOUNT</h3>
+                <form class="w-100" id="loginUser">
+                    <p id="sm"></p>
+                    <div class="input-group">
+                        <label for="email">Email*</label>
+                        <input type="email" class="w-80" name="email" required id="email" placeholder="Your Email">
+                        <div class="email error"></div>
+                    </div>
+                    <div class="input-group">
+                        <label for="pass">Password*</label>
+                        <input type="password" class="w-80" name="password" required id="pass"
+                            placeholder="Password here">
+                        <div class="password error"></div>
+                    </div>
+                    <button type="submit">Login</button> <a href="/signup">Create Account</a>
+                </form>
+            </div>
+            <div class="boadrs w-40">
+                <h1>No account?</h1>
+                <p>Single click can get you one.</p>
+                <a href="/signup" class="btn-login">SIGN UP</a>
+            </div>
+        </section>
+        <section id="contact" class="bg-white flex align-center content-center">
+            <div class="boadrs w-40">
+                <h1>Lets Chat</h1>
+            </div>
+            <div class="skills w-40">
+                <form class="w-100" id="sendMessage">
+                    <p id="feed"></p>
+                    <div class="input-group">
+                        <label for="names">Name*</label>
+                        <input type="text" class="w-80" name="names" id="names" required placeholder="Your full names">
+                        <div class="names error"></div>
+                    </div>
+                    <div class="input-group">
+                        <label for="eml">Email*</label>
+                        <input type="email" class="w-80" name="email" id="eml" required placeholder="Your Email">
+                        <div class="mail error"></div>
+                    </div>
+                    <div class="input-group">
+                        <label for="msg">Message*</label>
+                        <textarea name="msg" id="msg" class="w-80" rows="3" required
+                            placeholder="Lets start here"></textarea>
+                        <div class="content error"></div>
+                    </div>
+                    <button type="submit" id="message">Send</button>
+                </form>
+            </div>
+        </section>
+    </div>
+    <script src="js/main.js"></script>
+    <script>
+        const user = document.cookie;
+        if (user.includes('pbtkn') != false) {
+            document.querySelectorAll('#sgnbtn').forEach((el) => {
+                el.textContent = "Sign Out";
+                el.href = "/logout";
+            });
+        }
+        let loginForm = document.getElementById('loginUser');
+        let feed = document.getElementById('feed');
+        let messageForm = document.getElementById('sendMessage');
+        let emailError = document.querySelector('.email.error');
+        let passwordError = document.querySelector('.password.error');
+
+        let mailError = document.querySelector('.mail.error');
+        let contentError = document.querySelector('.content.error');
+        let nameError = document.querySelector('.names.error');
+
+        messageForm.addEventListener('submit', async (e) => {
+            feed.textContent = "Sending data...";
+            e.preventDefault();
+            let names = messageForm.names.value;
+            let email = messageForm.email.value;
+            let message = messageForm.msg.value;
+            mailError.textContent = '', contentError.textContent = '', nameError.textContent = '';
+            const send = await fetch('/inquiry', {
+                method: "POST",
+                body: JSON.stringify({
+                    names,
+                    email,
+                    message
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const sendResponse = await send.json();
+            if (await sendResponse.request) {
+                feed.textContent = 'Message Sent!';
+                names = email = message = '';
+            } else if (await sendResponse.errors) {
+                feed.textContent = sendResponse.message
+                mailError.textContent = sendResponse.errors.email;
+                nameError.textContent = sendResponse.errors.names;
+                contentError.textContent = sendResponse.errors.messageContent;
+            }
+        })
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            document.getElementById('sm').innerHTML =
+                '<i class="fa-solid fa-spinner fa-spin"></i> Authenticating....'
+            const email = loginForm.email.value;
+            const password = loginForm.password.value;
+            emailError.textContent = passwordError.textContent = '';
+            try {
+                const request = await fetch('/login', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        email,
+                        password
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const responseData = await request.json();
+                if (responseData.errors) {
+                    emailError.textContent = responseData.errors.email;
+                    passwordError.textContent = responseData.errors.password;
+                }
+                if (responseData.user) {
+                    const {
+                        userRole,
+                        user
+                    } = responseData;
+                    document.getElementById('sm').innerHTML = '<i class="fa-solid fa-check-square"></i> Authentication Successfully'
+                    if (userRole == 1) {
+                        location.assign('/dashboard')
+                    } else {
+                        location.assign('/blog');
+                    }
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        })
+    </script>
+    <script>
+        let navIcon = document.getElementById('navIcon');
+        let main = document.getElementById('main');
+        let more = document.querySelector('.more_info');
+        window.onscroll = () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+                navIcon.classList.add('ys');
+            } else {
+                header.classList.remove('scrolled');
+                navIcon.classList.remove('ys');
+            }
+        }
+        navIcon.addEventListener('click', () => {
+            mn.classList.toggle('show');
+        })
+        window.onresize = () => {
+            if (window.innerWidth <= 900) {
+                more.classList.remove('w-65');
+                more.classList.add('w-100')
+            } else {
+                more.classList.add('w-65');
+                more.classList.remove('w-100')
+            }
+            if (window.innerWidth >= 920 && window.innerWidth <= 1080) {
+                more.classList.add('w-65');
+                more.classList.remove('w-100')
+            }
+
+        }
+    </script>
+</body>
+
+</html>
