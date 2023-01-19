@@ -1,0 +1,79 @@
+<%- include('partials/header'); %>
+<script src="https://kit.fontawesome.com/cf03def005.js" crossorigin="anonymous"></script>
+<title>CREATE ACCOUNT ::MY Brand</title>
+</head>
+
+<body id="body">
+  <%- include('partials/nav') %>
+  <div class="main-page">
+    <section id="sign-in" class="bg-white signup flex align-center space-between">
+      <div class="boadrs w-40">
+        <h2>Already have an account?</h2>
+        <a href="/#sign-in" class="btn-login">SIGN IN</a>
+      </div>
+      <div class="skills w-40">
+        <form class="w-100" id="newAccount">
+          <div class="input-group">
+            <label for="email">Email*</label>
+            <input type="email" class="w-80" name="email" id="email" required placeholder="Your Email" />
+            <div class="email error"></div>
+          </div>
+          <div class="input-group">
+            <label for="names">Username*</label>
+            <input type="text" class="w-80" name="username" id="names" required placeholder="Your Username" />
+            <div class="username error"></div>
+          </div>
+          <div class="input-group">
+            <label for="pass">Password*</label>
+            <input type="password" class="w-80" name="password" id="pass" required placeholder="Password here" />
+            <div class="password error"></div>
+          </div>
+          <button type="submit">SIGN UP</button>
+        </form>
+      </div>
+    </section>
+  </div>
+  <script src="js/main.js"></script>
+  <script>
+    const form = document.querySelector("form");
+    let emailError = document.querySelector(".email.error");
+    let usernameError = document.querySelector(".username.error");
+    let passwordError = document.querySelector(".password.error");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      // Getting input values
+      const email = form.email.value;
+      const username = form.username.value;
+      const password = form.password.value;
+
+      emailError.textContent = usernameError.textContent = passwordError.textContent = "";
+
+      try {
+        const request = await fetch('/signup', {
+          method: "POST",
+          body: JSON.stringify({
+            email,
+            username,
+            password
+          }),
+          headers: {
+            'Content-Type': "application/json"
+          }
+        });
+        const responseData = await request.json();
+        if (responseData.errors) {
+          emailError.textContent = responseData.errors.email;
+          usernameError.textContent = responseData.errors.username;
+          passwordError.textContent = responseData.errors.password;
+        }
+        if (responseData.user) {
+          location.assign('/')
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    });
+  </script>
+</body>
+
+</html>
