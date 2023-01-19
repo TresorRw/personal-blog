@@ -1,0 +1,977 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito+Sans:200,200italic,300,300italic,regular,italic,600,600italic,700,700italic,800,800italic,900,900italic);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito Sans", sans-serif;
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.error {
+  color: #f00;
+}
+
+.good {
+  color: var(--color-bg);
+}
+
+.red {
+  color: #f00;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-bg);
+}
+
+:root {
+  --color-bg: #121257;
+  --color-white: #fff;
+}
+
+a {
+  text-decoration: none;
+}
+
+.menuTog {
+  display: none;
+  width: 200px;
+  max-width: 200px;
+  background-color: #fff;
+  border-radius: 5px;
+  position: fixed;
+  padding: 10px;
+  top: 70px;
+  right: 15%;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+}
+.menuTog.show {
+  display: block;
+}
+.menuTog a {
+  color: var(--color-bg);
+  display: block;
+  font-weight: 600;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+header {
+  width: 100vw;
+  padding: 10px;
+  background-color: var(--color-bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+}
+header.scrolled {
+  box-shadow: 0 5px 6px 0 rgba(0, 0, 51, 0.3);
+  background-color: var(--color-white);
+}
+header.scrolled .togglerIcon div {
+  background-color: var(--color-bg);
+}
+header.scrolled .nav-logo {
+  color: var(--color-bg);
+}
+header.scrolled li.active a {
+  font-weight: 900;
+}
+header.scrolled li.special {
+  background-color: var(--color-bg);
+}
+header.scrolled li.special a {
+  color: var(--color-white);
+}
+header.scrolled ul li a {
+  color: var(--color-bg);
+}
+header.scrolled ul li a:hover {
+  background-color: var(--color-bg);
+  color: var(--color-white);
+}
+header .nav-logo {
+  font-size: 2em;
+  font-weight: 800;
+  color: var(--color-white);
+  margin-left: 1%;
+}
+header .togglerIcon {
+  display: none;
+  cursor: pointer;
+  width: 40px;
+  height: 30px;
+  padding: 5px;
+  border-radius: 3px;
+}
+header .togglerIcon div {
+  background-color: var(--color-white);
+  width: 100%;
+  height: 3px;
+  border-radius: 3px;
+  margin: 5px 0;
+}
+header .togglerIcon.ys div {
+  background-color: var(--color-bg);
+}
+header li.special,
+header li.active {
+  padding: 0.3em 0.6em;
+  border-radius: 4px;
+}
+header li.special a,
+header li.active a {
+  font-weight: 800;
+  color: var(--color-white);
+}
+header li.special {
+  background-color: var(--color-white);
+}
+header li.special a {
+  color: var(--color-bg);
+}
+header ul li {
+  list-style-type: none;
+  display: inline-block;
+}
+header ul li a {
+  padding: 0.3em 0.6em;
+  color: var(--color-white);
+  border-radius: 4px;
+}
+header ul li a:hover {
+  background-color: var(--color-white);
+  color: var(--color-bg);
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.content-center {
+  justify-content: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.w-25 {
+  width: 25%;
+}
+
+.w-55 {
+  width: 55%;
+}
+
+.w-75 {
+  width: 75%;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+.w-40 {
+  width: 40%;
+}
+
+.w-65 {
+  width: 65%;
+}
+
+.bg-white {
+  background-color: var(--color-white) !important;
+}
+
+.main-page {
+  width: 100%;
+  margin-top: 63px;
+}
+.main-page section {
+  padding: 5%;
+}
+.main-page #main,
+.main-page #why,
+.main-page #who-am-i,
+.main-page #sign-in,
+.main-page #contact {
+  background-color: var(--color-bg);
+  height: calc(100vh - 63px);
+  transition: all 0.5s ease;
+}
+.main-page #main .bg_image img,
+.main-page #why .bg_image img,
+.main-page #who-am-i .bg_image img,
+.main-page #sign-in .bg_image img,
+.main-page #contact .bg_image img {
+  width: 300px;
+  border-radius: 20px;
+  max-width: 100%;
+}
+.main-page #main .bg_info,
+.main-page #why .bg_info,
+.main-page #who-am-i .bg_info,
+.main-page #sign-in .bg_info,
+.main-page #contact .bg_info {
+  margin-top: 4em;
+  color: var(--color-white);
+}
+.main-page #main .bg_info h3,
+.main-page #why .bg_info h3,
+.main-page #who-am-i .bg_info h3,
+.main-page #sign-in .bg_info h3,
+.main-page #contact .bg_info h3 {
+  font-size: 15px;
+}
+.main-page #main .bg_info h1,
+.main-page #why .bg_info h1,
+.main-page #who-am-i .bg_info h1,
+.main-page #sign-in .bg_info h1,
+.main-page #contact .bg_info h1 {
+  font-weight: 800;
+  font-size: 5em;
+}
+.main-page #main .bg_info h5,
+.main-page #why .bg_info h5,
+.main-page #who-am-i .bg_info h5,
+.main-page #sign-in .bg_info h5,
+.main-page #contact .bg_info h5 {
+  margin-top: -10px;
+  font-weight: 500;
+  font-size: 20px;
+}
+.main-page #main .bg_info span,
+.main-page #why .bg_info span,
+.main-page #who-am-i .bg_info span,
+.main-page #sign-in .bg_info span,
+.main-page #contact .bg_info span {
+  margin-right: 0.5em;
+}
+.main-page #main .bg_info p a,
+.main-page #why .bg_info p a,
+.main-page #who-am-i .bg_info p a,
+.main-page #sign-in .bg_info p a,
+.main-page #contact .bg_info p a {
+  color: var(--color-white);
+}
+.main-page #main .bg_info .addresss,
+.main-page #why .bg_info .addresss,
+.main-page #who-am-i .bg_info .addresss,
+.main-page #sign-in .bg_info .addresss,
+.main-page #contact .bg_info .addresss {
+  margin-top: 20px;
+}
+.main-page #main .bg_info .social_icons,
+.main-page #why .bg_info .social_icons,
+.main-page #who-am-i .bg_info .social_icons,
+.main-page #sign-in .bg_info .social_icons,
+.main-page #contact .bg_info .social_icons {
+  margin-top: 2em;
+}
+.main-page #main .bg_info .social_icons a,
+.main-page #why .bg_info .social_icons a,
+.main-page #who-am-i .bg_info .social_icons a,
+.main-page #sign-in .bg_info .social_icons a,
+.main-page #contact .bg_info .social_icons a {
+  color: var(--color-white);
+  padding: 10px;
+  width: 10px;
+  height: 10px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  margin: 5px 10px 5px 0;
+  border-radius: 50%;
+}
+.main-page #main .bg_info .social_icons a:hover,
+.main-page #why .bg_info .social_icons a:hover,
+.main-page #who-am-i .bg_info .social_icons a:hover,
+.main-page #sign-in .bg_info .social_icons a:hover,
+.main-page #contact .bg_info .social_icons a:hover {
+  background-color: var(--color-white);
+  color: var(--color-bg);
+}
+.main-page #why .progress,
+.main-page #sign-in .progress,
+.main-page #contact .progress {
+  margin-bottom: 15px;
+}
+.main-page #why .progress p,
+.main-page #sign-in .progress p,
+.main-page #contact .progress p {
+  font-weight: 600;
+}
+.main-page #why .progress .parent,
+.main-page #sign-in .progress .parent,
+.main-page #contact .progress .parent {
+  background-color: #d9d9d9;
+  height: 5px;
+  border-radius: 3px;
+}
+.main-page #why .progress .parent .child,
+.main-page #sign-in .progress .parent .child,
+.main-page #contact .progress .parent .child {
+  background-color: var(--color-bg);
+  height: 5px;
+  border-radius: inherit;
+}
+.main-page #why .boadrs .board,
+.main-page #sign-in .boadrs .board,
+.main-page #contact .boadrs .board {
+  width: 30%;
+  padding: 10px;
+  text-align: center;
+  background-color: var(--color-bg);
+  color: var(--color-white);
+  border-radius: 10px;
+  margin: 10px;
+}
+.main-page #why .boadrs .board h2,
+.main-page #sign-in .boadrs .board h2,
+.main-page #contact .boadrs .board h2 {
+  font-weight: 500;
+}
+.main-page #why .boadrs .board h2 span,
+.main-page #sign-in .boadrs .board h2 span,
+.main-page #contact .boadrs .board h2 span {
+  font-weight: 700;
+  font-size: 1.2em;
+}
+.main-page #who-am-i {
+  height: 100vh;
+}
+.main-page #who-am-i .more_info {
+  text-align: center;
+}
+.main-page #who-am-i .more_info h4 {
+  text-align: left;
+  font-size: 1.4em;
+  color: var(--color-bg);
+  margin-bottom: 0.3em;
+}
+.main-page #who-am-i .more_info h4 span {
+  font-weight: 900;
+}
+.main-page #who-am-i .more_info a.btn-download {
+  background-color: var(--color-bg);
+  color: var(--color-white);
+  padding: 0.5em 1em;
+  border-radius: 5px;
+}
+.main-page #who-am-i .more_info p {
+  text-align: left;
+}
+.main-page #who-am-i .more_info p#ls {
+  margin-bottom: 4em;
+}
+.main-page #contact {
+  background-image: url("../assets/wave-contact.png") !important;
+}
+.main-page .signup {
+  background-image: url("../assets/wave-register.png") !important;
+}
+.main-page .signup .boadrs {
+  text-align: center;
+}
+.main-page .signup h2 {
+  color: var(--color-white);
+  margin: 10px 0;
+  font-size: 2.5em !important;
+}
+.main-page #sign-in,
+.main-page #contact {
+  height: 100vh;
+  background-image: url("../assets/wave-login.png");
+  background-size: cover;
+  background-position: fixed;
+  background-repeat: no-repeat;
+}
+.main-page #sign-in form label,
+.main-page #contact form label {
+  display: block;
+  text-align: left;
+}
+.main-page #sign-in form input,
+.main-page #sign-in form textarea,
+.main-page #contact form input,
+.main-page #contact form textarea {
+  padding: 0.3em 0.5em;
+  text-align: left;
+  font-size: 16px;
+  border-radius: 3px;
+  outline: none;
+  border: 2px solid #d9d9d9;
+  resize: vertical;
+}
+.main-page #sign-in form .input-group,
+.main-page #contact form .input-group {
+  margin-bottom: 1em;
+}
+.main-page #sign-in form button,
+.main-page #contact form button {
+  padding: 0.3em 2em;
+  font-size: 16px;
+  border-radius: 3px;
+  cursor: pointer;
+  border-style: none;
+  background-color: var(--color-bg);
+  color: var(--color-white);
+  margin: 0 30%;
+}
+.main-page #sign-in .boadrs h1,
+.main-page #contact .boadrs h1 {
+  font-size: 4em;
+  font-weight: 900;
+  margin-top: -1em;
+  color: var(--color-white);
+}
+.main-page #sign-in .boadrs p,
+.main-page #contact .boadrs p {
+  color: var(--color-white);
+  margin-bottom: 3em;
+}
+.main-page .btn-login {
+  padding: 0.4em 1.5em;
+  font-size: 16px;
+  background-color: var(--color-white);
+  color: var(--color-bg);
+  border-radius: 10px;
+  margin: 3em 30% 0 30%;
+}
+.main-page .blog .actions {
+  margin-top: 1em;
+}
+.main-page .blog .actions a {
+  padding: 0.2em 2em;
+  font-size: 19px;
+  margin: 0 0.5em;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+.main-page .blog a {
+  color: var(--color-bg);
+  font-weight: 600;
+}
+.main-page .blog .blogTitle {
+  font-size: 1.5em;
+}
+.main-page .blog .smallPost {
+  margin: 10px 0;
+}
+.main-page .blog .info {
+  margin-left: 10px;
+}
+
+#why,
+#who-am-i,
+#sign-in,
+#contact {
+  height: 100vh !important;
+}
+
+nav {
+  padding: 5px;
+  position: -webkit-sticky;
+  position: sticky;
+  justify-content: space-between;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 51, 0.3);
+}
+nav a.logo {
+  color: var(--color-bg);
+  font-size: 2em;
+  font-weight: 900;
+}
+nav small {
+  color: var(--color-bg);
+  font-weight: 800;
+  font-size: 1.2em !important;
+}
+nav .userProfile {
+  font-size: 2em;
+  color: var(--color-bg);
+  margin-right: 1em;
+  cursor: pointer;
+}
+
+.menuUser,
+.menuPost {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  position: absolute;
+  top: 55px;
+  right: 50px;
+  padding: 0.5%;
+  display: none;
+}
+.menuUser.toggled,
+.menuPost.toggled {
+  display: block;
+}
+.menuUser a,
+.menuPost a {
+  display: block;
+  margin: 5px 10px;
+}
+.menuUser a.logout,
+.menuPost a.logout {
+  color: #f00;
+}
+
+#admin .sidebar {
+  background: var(--color-bg);
+  width: 240px;
+  height: 100vh;
+  padding: 1%;
+  justify-content: space-between;
+  flex-direction: column;
+}
+#admin .sidebar ul li {
+  list-style-type: none;
+  padding: 0.4em 1em;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+#admin .sidebar ul li:hover, #admin .sidebar ul li.active {
+  background-color: #fff;
+}
+#admin .sidebar ul li:hover a, #admin .sidebar ul li.active a {
+  color: var(--color-bg);
+}
+#admin .sidebar ul li a {
+  color: #fff;
+}
+
+#main-page {
+  margin-top: 20px;
+  padding: 1% 5%;
+}
+#main-page .contents {
+  flex-direction: column;
+}
+#main-page .contents button {
+  cursor: pointer;
+  border-style: none;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 51, 0.3);
+  padding: 0.3em 1em;
+  width: 150px;
+  border-radius: 5px;
+  font-size: 18px;
+  margin: 10px 0;
+  background-color: var(--color-white);
+  color: var(--color-bg);
+  font-weight: 600;
+}
+#main-page .contents img {
+  width: 100px;
+}
+#main-page .contents .more {
+  margin-left: 10px;
+}
+#main-page .contents #posts {
+  margin: auto;
+}
+#main-page .contents .card {
+  width: 360px;
+  max-width: 100%;
+  display: flex;
+  margin: 10px 0;
+  justify-content: space-between;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 5px;
+}
+#main-page .contents .card img {
+  width: 70px;
+}
+#main-page .contents .card > div {
+  margin: 0 5px;
+}
+#main-page .contents .settings a {
+  color: var(--color-bg);
+  cursor: pointer;
+}
+
+.main-content {
+  padding: 1%;
+}
+
+.cards {
+  margin-top: 3%;
+}
+.cards .form-group {
+  margin: 10px 0;
+}
+.cards form input {
+  outline: none;
+  padding: 0.3em 0.5em;
+  border-radius: 2px;
+  border: 1px solid #121257;
+  width: 100%;
+}
+.cards form button {
+  padding: 0.4em 1em;
+  border-style: none;
+  background-color: var(--color-bg);
+  color: var(--color-white);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form a {
+  display: none;
+}
+
+.cards .card {
+  text-align: center;
+  width: 20%;
+  padding: 1%;
+  margin: 10px 2em;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 51, 0.5);
+  border-radius: 10px;
+}
+
+#sign-in .skills h3 {
+  display: none !important;
+}
+
+.postForm,
+.updateForm,
+#confirm {
+  display: none;
+  width: 400px;
+  max-width: 100%;
+  margin: auto;
+  position: absolute;
+  background-color: #fff;
+  top: 1%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+.postForm.show,
+.updateForm.show,
+#confirm.show {
+  display: block;
+}
+.postForm .header,
+.updateForm .header,
+#confirm .header {
+  background-color: var(--color-bg);
+  color: var(--color-white);
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+}
+.postForm .body,
+.updateForm .body,
+#confirm .body {
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+}
+.postForm .body form input,
+.postForm .body textarea,
+.updateForm .body form input,
+.updateForm .body textarea,
+#confirm .body form input,
+#confirm .body textarea {
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  padding: 0.3em 0.5em;
+  border: 2px solid #d9d9d9;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  resize: vertical;
+}
+.postForm .body button,
+.updateForm .body button,
+#confirm .body button {
+  padding: 0.3em 2em;
+  font-size: 18px;
+  background-color: var(--color-bg);
+  color: var(--color-white);
+  border-style: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dash-stats {
+  justify-content: center;
+  margin-top: -6em;
+  margin-left: 6em;
+}
+.dash-stats .singleStat {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
+  margin: 10px 15px;
+  width: 100px;
+  max-width: 40%;
+}
+
+.singleView {
+  display: flex;
+  justify-content: center;
+  margin-top: 3%;
+  width: 100%;
+  padding: 5%;
+}
+.singleView .blogContent {
+  width: 65%;
+}
+.singleView .blogContent .stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.singleView .blogContent .stats p {
+  font-size: 16px;
+  color: var(--color-bg);
+  border: 2px solid var(--color-bg);
+  border-radius: 3px;
+  padding: 3px 15px;
+}
+.singleView .blogComment {
+  width: 30%;
+  margin-left: 3%;
+}
+.singleView .blogComment .comment {
+  margin: 10px 0;
+}
+.singleView .blogComment .comment form input {
+  width: 80%;
+  padding: 0.4em 1em;
+  outline: none;
+  border-style: none;
+  border-bottom: 2px solid var(--color-bg);
+}
+.singleView .blogComment .comment form button {
+  border-style: none;
+  cursor: pointer;
+  background: transparent;
+  font-size: 1em;
+  color: var(--color-bg);
+}
+
+#linkManager a {
+  margin: 0.3em 0.7em;
+}
+
+@media screen and (max-width: 1060px) {
+  .main-page #contact {
+    background-image: unset !important;
+    display: block !important;
+    background-color: var(--color-white) !important;
+  }
+  .main-page #contact h1 {
+    font-size: 2em !important;
+  }
+  .main-page #contact .skills,
+.main-page #contact .boadrs {
+    margin-top: 2em !important;
+    width: 100% !important;
+  }
+  .main-page #contact .skills form label {
+    color: #000 !important;
+  }
+  .main-page #contact .skills form button {
+    background-color: var(--color-bg) !important;
+    color: var(--color-white) !important;
+    margin: 0 !important;
+  }
+  #sign-in,
+#contact {
+    background-image: unset !important;
+  }
+  #sign-in .boadrs {
+    width: 50%;
+  }
+  #sign-in .boadrs h2,
+#sign-in .boadrs h1 {
+    font-size: 2em !important;
+  }
+  #sign-in .boadrs h1,
+#sign-in .boadrs p,
+#sign-in .boadrs h2 {
+    color: var(--color-bg) !important;
+  }
+  .btn-login {
+    color: var(--color-white) !important;
+    background-color: var(--color-bg) !important;
+  }
+  #main {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-direction: column !important;
+  }
+  #main h1 {
+    font-size: 2em !important;
+  }
+  #main .bg_image {
+    width: 50% !important;
+    text-align: center !important;
+  }
+  #why,
+#who-am-i {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-direction: column !important;
+  }
+  #why .bg_image,
+#who-am-i .bg_image {
+    width: 60% !important;
+  }
+  #why .skills,
+#who-am-i .skills {
+    width: 50% !important;
+  }
+  #why .boadrs,
+#who-am-i .boadrs {
+    margin-top: 5%;
+  }
+}
+@media screen and (max-width: 920px) {
+  .bg-image {
+    width: 100% !important;
+  }
+  .btn-login {
+    color: var(--color-white) !important;
+    background-color: var(--color-bg) !important;
+  }
+  #why,
+#sign-in {
+    display: block !important;
+  }
+  #why .skills,
+#why .boadrs,
+#sign-in .skills,
+#sign-in .boadrs {
+    width: 100% !important;
+  }
+  #why .skills .progress,
+#sign-in .skills .progress {
+    width: 100% !important;
+  }
+  #why .boadrs .board,
+#sign-in .boadrs .board {
+    width: 40% !important;
+  }
+  #why .boadrs .board h2,
+#sign-in .boadrs .board h2 {
+    font-size: 1.2em !important;
+  }
+  #sign-in .skills {
+    width: 100% !important;
+    margin-bottom: 15% !important;
+  }
+  #sign-in .skills form {
+    width: 120% !important;
+  }
+  #sign-in .skills form button {
+    margin: 0 !important;
+  }
+  #sign-in .boadrs {
+    text-align: center;
+  }
+  #sign-in .boadrs .btn-login {
+    margin: 0 !important;
+  }
+  li, ul {
+    display: none !important;
+  }
+  .togglerIcon {
+    display: block !important;
+  }
+  .singleView {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 640px) {
+  .main-page .blog img {
+    width: 80% !important;
+  }
+  .singleView .blogContent, .singleView .blogComment {
+    width: 90% !important;
+  }
+  .singleView .blogContent img, .singleView .blogComment img {
+    width: 100% !important;
+  }
+  #posts .card {
+    display: block !important;
+  }
+  #posts .card img {
+    width: 100% !important;
+  }
+  #posts .card .more {
+    width: 50% !important;
+  }
+  .actions a {
+    display: block !important;
+    width: 40% !important;
+    margin: 5px 0 !important;
+  }
+  #contact h1 {
+    color: #000 !important;
+  }
+  form a {
+    display: inline !important;
+  }
+  #sign-in .skills h3 {
+    display: block !important;
+    margin-bottom: 1em !important;
+  }
+  #sign-in .boadrs {
+    display: none !important;
+  }
+  .addresss p span {
+    display: none !important;
+  }
+  #main {
+    display: block !important;
+    text-align: center !important;
+    height: auto !important;
+  }
+  #main .bg_image,
+#main .bg_info {
+    width: 100% !important;
+  }
+  #main h3 {
+    display: none !important;
+  }
+  #who-am-i {
+    display: block !important;
+  }
+}/*# sourceMappingURL=main.css.map */
