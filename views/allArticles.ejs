@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="assets/apple-touch-icon.png" type="image/png" />
+    <link rel="stylesheet" href="css/main.css" />
+    <script src="https://kit.fontawesome.com/cf03def005.js" crossorigin="anonymous"></script>
+    <title>All Articles ::MY Brand</title>
+</head>
+
+<body id="body">
+    <nav class="w-100 flex align-center">
+        <div class="lg">
+            <a href="#" class="logo">Tresor</a>
+            <small>blog</small>
+        </div>
+        <ul>
+            <li><a href="/blog">Blog</a></li>
+        </ul>
+        <div id="toggler" class="profile">
+            <div class="userProfile fa-solid fa-user-circle"></div>
+        </div>
+    </nav>
+    <div id="menus" class="menuUser">
+        <a href="/blog">Blog</a>
+        <!-- <a href="#"><span class="fa-solid fa-user-cog"></span> Profile</a> -->
+        <a href="/logout" class="logout"><span class="fa-solid fa-right-from-bracket"></span> Logout</a>
+    </div>
+    <div id="main-page" class="w-100" style="height: 100vh; background: whitesmoke">
+        <h3><small>blog/</small> all articles</h3>
+        <div class="contents w-100 flex content-center">
+            <%- include('partials/side') %>
+            <div id="posts" class="posts"></div>
+        </div>
+    </div>
+    <div id="form" class="postForm">
+        <div class="header flex space-between">
+            <h3>ADD NEW POST</h3>
+            <span id="close" class="fa-solid fa-close"></span>
+        </div>
+        <div class="body"><%- include('partials/blogForm') %></div>
+    </div>
+
+    <div id="updateForm" class="updateForm">
+        <div class="header flex space-between">
+            <h3>UPDATE POST</h3>
+            <span id="closes" class="fa-solid fa-close"></span>
+        </div>
+        <div class="body">
+            <form id="upF">
+                <p id="sms"></p>
+                <input type="hidden" name="id" id="ids" />
+                <input type="text" name="pt" placeholder="Blog Title" required id="n_t" />
+                <input type="text" name="pc" placeholder="Catogory" required id="n_c" />
+                <textarea id="n_desc" name="pm" cols="30" rows="5" required placeholder="More"></textarea>
+                <button type="submit" id="update">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="confirm" class="">
+        <div class="header flex space-between">
+            <h3>Confirm Deletion</h3>
+            <span id="closess" class="fa-solid fa-close"></span>
+        </div>
+        <div class="body">
+            <p><b>You can not reverse this action!</b></p>
+            <button id="delAllow" style="margin-top: 10px;background-color: rgb(146, 4, 4); color: #fff;">Delete</button>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+    <script src="js/sendPost.js"></script>
+    <script src="js/renderPost.js"></script>
+    <script>
+        let confirmDialog = document.querySelector('#confirm');
+        let postContainer = document.querySelector(".posts");
+        let up_form = document.getElementById("updateForm");
+        let realUpdateForm = document.getElementById("upF");
+        let clses = document.getElementById("closes");
+        let closess = document.getElementById("closess");
+        let pgs = document.getElementById('main-page');
+        clses.addEventListener("click", () => {
+            up_form.classList.remove("show");
+            pg.style.filter = "";
+        });
+        closess.addEventListener('click', () => {
+            confirmDialog.classList.remove('show');
+            pg.style.filter = '';
+        })
+        document.addEventListener("DOMContentLoaded", async (e) => {
+            let pst = await fetchAllArticles();
+            for (let i = 0; i < pst.length; i++) {
+                post = pst[i];
+                postContainer.innerHTML += `
+                <div class="card">
+                    <img src="${post.postImage}" alt="${post.title}">
+                    <div class="text-info">
+                        <h5>${post.title}</h5>
+                        <p>${post.content.substr(0, 50)}.</p>
+                    </div>
+                    <div class="settings">
+                        <a id="editPost" did="${post._id}">Edit</a>
+                        <a id="delete" did="${post._id}">Delete</a>
+                    </div>
+                </div>
+            `;
+            }
+            const deles = document.querySelectorAll("#delete");
+            const edits = document.querySelectorAll("#editPost");
+            edits.forEach((edit) => {
+                edit.addEventListener("click", async (e) => {
+                    e.preventDefault();
+                    post = edit.attributes.did.nodeValue;
+                    const getPost = await fetch(`/singlePost?post=${post}`, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                    });
+                    const response = await getPost.json();
+                    document.getElementById('ids').value = response.request._id;
+                    document.getElementById('n_t').value = response.request.title;
+                    document.getElementById('n_c').value = response.request.category;
+                    document.getElementById('n_desc').value = response.request.content;
+                    up_form.classList.add('show')
+                    pgs.style.filter = 'blur(3px)';
+                });
+            });
+            deles.forEach((ele) => {
+                ele.addEventListener("click", async (e) => {
+                    const post = ele.attributes.did.nodeValue;
+                    confirmDialog.classList.add('show');
+                    pg.style.filter = "blur(3px)";
+                    document.getElementById('delAllow').addEventListener('click', e => {
+                        e.preventDefault();
+                        deletePost(post);
+                    })
+                });
+            });
+            realUpdateForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const postID = realUpdateForm.id.value;
+                const newTitle = realUpdateForm.pt.value;
+                const newCategory = realUpdateForm.pc.value;
+                const newContent = realUpdateForm.pm.value;
+                const sendUpdateRequest = await fetch(`/update?post=${postID}`, {
+                    method: "PATCH",
+                    body: JSON.stringify({
+                        title: newTitle,
+                        category: newCategory,
+                        content: newContent
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const sendUpdateResponse = await sendUpdateRequest.json();
+                if (await sendUpdateResponse.status == 202) {
+                    window.location.reload();
+                } else {
+                    alert(await sendUpdateResponse.message)
+                }
+            })
+            async function deletePost(post) {
+                const req = await fetch("/delete", {
+                    method: "DELETE",
+                    body: JSON.stringify({
+                        post,
+                    }),
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+                window.location.reload();
+            }
+        });
+    </script>
+    <script>
+        let btn = document.getElementById("new");
+        let form = document.getElementById("form");
+        let pg = document.getElementById("main-page");
+        let clse = document.getElementById("close");
+        let toggler = document.getElementById("toggler");
+
+        clse.addEventListener("click", () => {
+            form.classList.remove("show");
+            pg.style.filter = "";
+        });
+        btn.addEventListener("click", () => {
+            form.classList.toggle("show");
+            if (form.className == "postForm show") {
+                pg.style.filter = "blur(3px)";
+            } else {
+                pg.style.filter = "";
+            }
+        });
+        toggler.addEventListener("click", () => {
+            menus.classList.toggle("toggled");
+        });
+    </script>
+</body>
+
+</html>
