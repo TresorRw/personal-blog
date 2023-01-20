@@ -247,6 +247,9 @@
                         userRole,
                         user
                     } = responseData;
+                    var someDate = new Date();
+                    var result = someDate.setDate(someDate.getDate() + 5);
+                    document.cookie = `uipidky=${user}; expires=${new Date(result)}`;
                     document.getElementById('sm').innerHTML = '<i class="fa-solid fa-check-square"></i> Authentication Successfully'
                     if (userRole == 1) {
                         location.assign('/dashboard')
