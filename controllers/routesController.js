@@ -176,6 +176,7 @@ module.exports.login_post = async (req, res) => {
     const login = await User.login(email, password);
     const authToken = createToken(login._id);
     const userRole = login.userRole;
+    console.log(login._id);
     res.cookie("uipid", login._id, {
       maxAge: duration * 1000
     });
