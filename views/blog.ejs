@@ -1,76 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="shortcut icon"
-      href="assets/apple-touch-icon.png"
-      type="image/png"
-    />
-    <link rel="stylesheet" href="css/main.css" />
-    <script
-      src="https://kit.fontawesome.com/cf03def005.js"
-      crossorigin="anonymous"
-    ></script>
-    <title>BLOG :: MY Brand</title>
-  </head>
 
-  <body id="body">
-    <header id="top" class="scrolled">
-      <a href="/" class="nav-logo">Tresor</a>
-      <ul id="linkManager"></ul>
-      <div class="togglerIcon" id="navIcon">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </header>
-    <div class="menuTog" id="mn"></div>
-    <div class="main-page">
-      <section id="why" class="bg-white blog flex">
-        <div class="skills w-75">
-          <div id="bigContent" class="blogData"></div>
-        </div>
-        <div class="boadrs w-25">
-          <h3>Other Posts</h3>
-          <div id="small_pst" class="smallPosts"></div>
-        </div>
-      </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="assets/apple-touch-icon.png" type="image/png" />
+  <link rel="stylesheet" href="css/main.css" />
+  <script src="https://kit.fontawesome.com/cf03def005.js" crossorigin="anonymous"></script>
+  <title>BLOG :: MY Brand</title>
+</head>
+
+<body id="body">
+  <header id="top" class="scrolled">
+    <a href="/" class="nav-logo">Tresor</a>
+    <ul id="linkManager"></ul>
+    <div class="togglerIcon" id="navIcon">
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
-    <script src="js/main.js"></script>
-    <script src="js/renderPost.js"></script>
-    <script>
-      let user = document.cookie;
-      let blogCenter = document.getElementById("bigContent");
-      let small_pst = document.getElementById("small_pst");
-      let form = document.getElementById("form");
-      let pg = document.getElementsByClassName("main-page")[0];
-      let linkManager = document.getElementById("linkManager");
-      let commentBtn = document.getElementById("test");
-      let navIcon = document.getElementById("navIcon");
-      navIcon.addEventListener("click", () => {
-        mn.classList.toggle("show");
-      });
+  </header>
+  <div class="menuTog" id="mn"></div>
+  <div class="main-page">
+    <section id="why" class="bg-white blog flex">
+      <div class="skills w-75">
+        <div id="bigContent" class="blogData"></div>
+      </div>
+      <div class="boadrs w-25">
+        <h3>Other Posts</h3>
+        <div id="small_pst" class="smallPosts"></div>
+      </div>
+    </section>
+  </div>
+  <script src="js/main.js"></script>
+  <script src="js/renderPost.js"></script>
+  <script>
+    let user = document.cookie;
+    let blogCenter = document.getElementById("bigContent");
+    let small_pst = document.getElementById("small_pst");
+    let form = document.getElementById("form");
+    let pg = document.getElementsByClassName("main-page")[0];
+    let linkManager = document.getElementById("linkManager");
+    let commentBtn = document.getElementById("test");
+    let navIcon = document.getElementById("navIcon");
+    navIcon.addEventListener("click", () => {
+      mn.classList.toggle("show");
+    });
 
-      document.addEventListener("DOMContentLoaded", async (e) => {
-        let renderedPosts = await fetchAllArticles();
-        let random = Math.floor(Math.random() * renderedPosts.length);
-        let blogInfo = renderedPosts[random];
-        let allLikes = await fetchAllArticlesLikes(blogInfo._id);
-        let allComments = await fetchAllArticlesComment(blogInfo._id);
-        if (await allLikes.results) {
-          count = await allLikes.results.length;
-        } else {
-          count = 0;
-        }
-        if(await allComments.comments) {
-          countComs = await allComments.comments.length;
-        } else {
-          countComs = 0;
-        }
-        blogCenter.innerHTML = `
+    document.addEventListener("DOMContentLoaded", async (e) => {
+      let renderedPosts = await fetchAllArticles();
+      let random = Math.floor(Math.random() * renderedPosts.length);
+      let blogInfo = renderedPosts[random];
+      let allLikes = await fetchAllArticlesLikes(blogInfo._id);
+      let allComments = await fetchAllArticlesComment(blogInfo._id);
+      if (await allLikes.results) {
+        count = await allLikes.results.length;
+      } else {
+        count = 0;
+      }
+      if (await allComments.comments) {
+        countComs = await allComments.comments.length;
+      } else {
+        countComs = 0;
+      }
+      blogCenter.innerHTML = `
                     <div id="bigOne">
                     <img class="" src="${blogInfo.postImage}" alt="${blogInfo.title}">
                     <div class="info">
@@ -83,41 +77,46 @@
                         <a class="like"><i class="fa-regular fa-share-from-square"></i></a>
                     </div>
                     </div>`;
-        let lp = document.getElementById("lp");
-        small_pst.innerHTML = "";
-        for (let i = 0; i < renderedPosts.length; i++) {
-          let pot = renderedPosts[i];
-          small_pst.innerHTML += `
+      let lp = document.getElementById("lp");
+      small_pst.innerHTML = "";
+      for (let i = 0; i < renderedPosts.length; i++) {
+        let pot = renderedPosts[i];
+        small_pst.innerHTML += `
                     <div class="smallPost flex align-center">
                         <div class="info">
                             <a href="/single?post=${pot._id}">${pot.title}</a>
                         </div>
                     </div>`;
-        }
+      }
+    });
+  </script>
+  <script>
+    const likePost = async (post_id) => {
+      const post = post_id;
+      const request = await fetch("/like", {
+        method: "POST",
+        body: JSON.stringify({
+          post_id
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        },
       });
-    </script>
-    <script>
-      const likePost = async (post_id) => {
-        const post = post_id;
-        const request = await fetch("/like", {
-          method: "POST",
-          body: JSON.stringify({ post_id }),
-          headers: { "Content-Type": "application/json" },
-        });
-        const response = await request.json();
-        if ((await response.status) == 201) {
-          count = count + 1;
-          lp.style.color = 'green';
-        } else if((await response.status) == 403){
-          alert("Please login to make an action on post");
-        } else {
-          count = count - 1;
-          lp.style.color = '#003';
-        }
-        document.getElementById(
-          "lp"
-        ).innerHTML = `<i class="fa-regular fa-thumbs-up"></i> ${count}`;
-      };
-    </script>
-  </body>
+      const response = await request.json();
+      if ((await response.status) == 201) {
+        count = count + 1;
+        lp.style.color = 'green';
+      } else if ((await response.status) == 403) {
+        alert("Please login to make an action on post");
+      } else {
+        count = count - 1;
+        lp.style.color = '#003';
+      }
+      document.getElementById(
+        "lp"
+      ).innerHTML = `<i class="fa-regular fa-thumbs-up"></i> ${count}`;
+    };
+  </script>
+</body>
+
 </html>
