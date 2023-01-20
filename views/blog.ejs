@@ -121,10 +121,6 @@
         },
       });
       const response = await request.json();
-      var someDate = new Date();
-      var result = someDate.setDate(someDate.getDate() + 5);
-      console.log(new Date(result))
-      document.cookie = `uipidky=${await response.user}; expires=Thu, 18 Dec 2023 12:00:00 UTC;`;
       if ((await response.status) == 201) {
         count = count + 1;
         lp.style.color = 'green';
