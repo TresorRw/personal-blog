@@ -160,10 +160,12 @@
       if ((await response.status) == 201) {
         count = count + 1;
         lp.style.color = "green";
+        isLiked = true;
       } else if ((await response.status) == 403) {
         alert("Please login to make an action on post");
       } else {
         count = count - 1;
+        isLiked = false;
         lp.style.color = "#003";
       }
       document.getElementById(
@@ -184,10 +186,12 @@
       if ((await response.status) == 201) {
         countDis = countDis + 1;
         dp.style.color = "red";
+        isDisliked = true;
       } else if ((await response.status) == 403) {
         alert("Please login to make an action on post");
       } else {
         countDis = countDis - 1;
+        isDisliked = false;
         dp.style.color = "#003";
       }
       document.getElementById(
