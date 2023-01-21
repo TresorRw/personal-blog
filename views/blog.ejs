@@ -65,6 +65,23 @@
       mn.innerHTML = `<a href="/logout" class="logout"><span class="fa-solid fa-right-from-bracket"></span> Logout</a>`;
       linkManager.innerHTML = linkManager.innerHTML = `<li><a href="/logout" >Logout</a></li>`;
     }
+
+    function getCookie(cname) {
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(";");
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+    const loggedUserID = getCookie('uipidky');
     document.addEventListener("DOMContentLoaded", async (e) => {
       let renderedPosts = await fetchAllArticles();
       let random = Math.floor(Math.random() * renderedPosts.length);
