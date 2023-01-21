@@ -143,7 +143,8 @@
        if(com.user == loggedInUserID) {
         commentSection.innerHTML += `
         <div class="comment">
-            <h6><i class="fa-solid fa-user"></i> ${com.names}</h6> <a>edit || Delete</a>
+            <h6><i class="fa-solid fa-user"></i> ${com.names}</h6>
+            <small><a onclick="editComment(${com.og})" style="color: #05f;">edit</a> <a onclick="deleteComment(${com.og})" style="color: #f00;">remove</a></small>
             <p>${com.message}</p>
           </div>
         `;
