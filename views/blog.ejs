@@ -89,17 +89,15 @@
       let random = Math.floor(Math.random() * renderedPosts.length);
       let blogInfo = renderedPosts[random];
       let allLikes = await fetchAllArticlesLikes(blogInfo._id);
+      let allComments = await fetchAllArticlesComment(blogInfo._id);
       if (await allLikes.results) {
+        count = await allLikes.results.length;
         let found = await allLikes.results.filter((el, inx) => el.userID == loggedUserID)[0];
         if (found != "") {
           isLiked = true;
         } else {
           isLiked = false;
         }
-      }
-      let allComments = await fetchAllArticlesComment(blogInfo._id);
-      if (await allLikes.results) {
-        count = await allLikes.results.length;
       } else {
         count = 0;
       }
