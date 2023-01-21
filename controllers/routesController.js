@@ -337,7 +337,7 @@ module.exports.dislike_post = async (req, res) => {
       } else {
         const user_id = decodedToken.id;
         const date = new Date();
-        const likeDate = date.toDateString() + " " + date.toLocaleTimeString();
+        const dislikeDate = date.toDateString() + " " + date.toLocaleTimeString();
 
         const newdisLike = {
           postID: post_id,
