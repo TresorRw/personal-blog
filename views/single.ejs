@@ -106,6 +106,8 @@
     const addComment = document.getElementById("addComment");
     let commentSection = document.getElementById('cms')
     const comForm = document.getElementById("commentForm");
+    const loggedInUserID = getCookie('uipiky');
+    console.log(loggedInUserID);
     comForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const postid = comForm.post.value;
@@ -120,8 +122,6 @@
           "Content-Type": "application/json",
         },
       });
-      const loggedInUserID = getCookie('uipiky');
-      console(loggedInUserID);
       const response = await request.json();
       document.querySelector(".log").innerHTML = await response.message;
       if ((await response.status) == 201) {
