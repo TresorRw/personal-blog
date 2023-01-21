@@ -772,3 +772,7 @@ module.exports.deleteComment = async (req, res) => {
     }
   }
 };
+
+module.exports.editComment = async (req, res) => {
+  console.log('hello');
+}
