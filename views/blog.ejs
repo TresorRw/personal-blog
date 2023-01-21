@@ -82,6 +82,7 @@
       return "";
     }
     const loggedUserID = getCookie('uipidky');
+    let isLiked;
     document.addEventListener("DOMContentLoaded", async (e) => {
       let renderedPosts = await fetchAllArticles();
       let random = Math.floor(Math.random() * renderedPosts.length);
@@ -89,9 +90,9 @@
       let allLikes = await fetchAllArticlesLikes(blogInfo._id);
       let found = allLikes.results.filter((el, inx) => el.userID == loggedUserID)[0];
       if(found != '') {
-        isLiked = false;
-      } else {
         isLiked = true;
+      } else {
+        isLiked = false;
       }
       let allComments = await fetchAllArticlesComment(blogInfo._id);
       if (await allLikes.results) {
