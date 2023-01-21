@@ -83,7 +83,7 @@
       return "";
     }
     const loggedUserID = getCookie("uipidky");
-    let isLiked;
+    let isLiked, dislike;
     document.addEventListener("DOMContentLoaded", async (e) => {
       let renderedPosts = await fetchAllArticles();
       let random = Math.floor(Math.random() * renderedPosts.length);
