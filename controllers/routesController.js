@@ -741,3 +741,34 @@ module.exports.saveProfile = async (req, res) => {
     });
   }
 }
+
+// Deleting comment
+module.exports.deleteComment = async (req, res) => {
+  const com_id = req.body.post;
+  if (!com_id) {
+    res.status(400).json({
+      status: 400,
+      message: "Please provide Comment ID."
+    });
+  } else {
+    try {
+      const dele = await Comment.deleteOne({
+        _id: com_id
+      });
+      res
+        .status(202)
+        .json({
+          status: 202,
+          message: "Comment deleted!",
+          deletedCount: dele.deletedCount,
+        });
+    } catch (err) {
+      res
+        .status(400)
+        .json({
+          status: 400,
+          message: "Can not delete due to unknown comment id.",
+        });
+    }
+  }
+};
