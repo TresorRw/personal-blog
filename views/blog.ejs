@@ -88,7 +88,11 @@
       let blogInfo = renderedPosts[random];
       let allLikes = await fetchAllArticlesLikes(blogInfo._id);
       let found = allLikes.results.filter((el, inx) => el.userID == loggedUserID)[0];
-      console.log(found);
+      if(found != '') {
+        isLiked = false;
+      } else {
+        isLiked = true;
+      }
       let allComments = await fetchAllArticlesComment(blogInfo._id);
       if (await allLikes.results) {
         count = await allLikes.results.length;
@@ -115,6 +119,9 @@
                     </div>
                     </div>`;
       let lp = document.getElementById("lp");
+      if(isLiked) {
+        lp.style.color = "green";
+      }
       small_pst.innerHTML = "";
       for (let i = 0; i < renderedPosts.length; i++) {
         let pot = renderedPosts[i];
