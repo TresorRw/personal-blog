@@ -504,6 +504,7 @@ router.post("/like", allowUser, routesController.like_post);
 router.post("/dislike", allowUser, routesController.dislike_post);
 router.post("/comment", allowUser, routesController.comment_post);
 router.get("/getAllPostsLikes", authUser, routesController.getLikes);
+router.get("/getAllPostsdisLikes", authUser, routesController.getdisLikes);
 router.get("/getAllComments", authUser, routesController.getComments);
 
 /* Modification on posts */
