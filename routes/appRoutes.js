@@ -503,9 +503,9 @@ router.post('/profile', authUser, routesController.saveProfile);
 router.post("/like", allowUser, routesController.like_post);
 router.post("/dislike", allowUser, routesController.dislike_post);
 router.post("/comment", allowUser, routesController.comment_post);
-router.get("/getAllPostsLikes", authUser, routesController.getLikes);
-router.get("/getAllPostsdisLikes", authUser, routesController.getdisLikes);
-router.get("/getAllComments", authUser, routesController.getComments);
+router.get("/getAllPostsLikes", routesController.getLikes);
+router.get("/getAllPostsdisLikes", routesController.getdisLikes);
+router.get("/getAllComments", routesController.getComments);
 
 /* Modification on posts */
 // Deleting
