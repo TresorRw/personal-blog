@@ -145,30 +145,13 @@
     });
   </script>
   <script>
-    const likePost = async (post_id) => {
+    const likePost = async (post_id, disliked) => {
       const post = post_id;
-      const request = await fetch("/like", {
-        method: "POST",
-        body: JSON.stringify({
-          post_id,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const response = await request.json();
-      if ((await response.status) == 201) {
-        count = count + 1;
-        lp.style.color = "green";
-      } else if ((await response.status) == 403) {
-        alert("Please login to make an action on post");
+      if(disliked == true) {
+        console.log('II found a like. am going to remove it then like the post')
       } else {
-        count = count - 1;
-        lp.style.color = "#003";
+        console.log('Oooooh, you are good to go and like your post');
       }
-      document.getElementById(
-        "lp"
-      ).innerHTML = `<i class="fa-regular fa-thumbs-up"></i> ${count}`;
     };
 
     const dislikePost = async (post_id) => {
