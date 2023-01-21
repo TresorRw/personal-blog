@@ -351,7 +351,7 @@ module.exports.dislike_post = async (req, res) => {
         });
         const t = await check;
         if (t == null) {
-          const saveLike = await Dislike.create(newLike);
+          const saveLike = await Dislike.create(newdisLike);
           res
             .status(201)
             .json({
