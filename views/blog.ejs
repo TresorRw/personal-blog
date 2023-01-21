@@ -47,7 +47,7 @@
     navIcon.addEventListener("click", () => {
       mn.classList.toggle("show");
     });
-    if (user.includes('pbtkn') == false) {
+    if (user.includes("pbtkn") == false) {
       mn.innerHTML = `
         <a href="/#main">Home</a>
     <a href="/#why">Why me?</a>
@@ -63,7 +63,8 @@
           <li class="special"><a href="/#contact">Send inquiry</a></li>`;
     } else {
       mn.innerHTML = `<a href="/logout" class="logout"><span class="fa-solid fa-right-from-bracket"></span> Logout</a>`;
-      linkManager.innerHTML = linkManager.innerHTML = `<li><a href="/logout" >Logout</a></li>`;
+      linkManager.innerHTML =
+        linkManager.innerHTML = `<li><a href="/logout" >Logout</a></li>`;
     }
 
     function getCookie(cname) {
@@ -81,18 +82,20 @@
       }
       return "";
     }
-    const loggedUserID = getCookie('uipidky');
+    const loggedUserID = getCookie("uipidky");
     let isLiked;
     document.addEventListener("DOMContentLoaded", async (e) => {
       let renderedPosts = await fetchAllArticles();
       let random = Math.floor(Math.random() * renderedPosts.length);
       let blogInfo = renderedPosts[random];
       let allLikes = await fetchAllArticlesLikes(blogInfo._id);
-      let found = await allLikes.results.filter((el, inx) => el.userID == loggedUserID)[0];
-      if(found != '') {
-        isLiked = true;
-      } else {
-        isLiked = false;
+      if (allLikes.results) {
+        let found = await allLikes.results.filter((el, inx) => el.userID == loggedUserID)[0];
+        if (found != "") {
+          isLiked = true;
+        } else {
+          isLiked = false;
+        }
       }
       let allComments = await fetchAllArticlesComment(blogInfo._id);
       if (await allLikes.results) {
@@ -120,7 +123,7 @@
                     </div>
                     </div>`;
       let lp = document.getElementById("lp");
-      if(isLiked) {
+      if (isLiked) {
         lp.style.color = "green";
       }
       small_pst.innerHTML = "";
@@ -141,21 +144,21 @@
       const request = await fetch("/like", {
         method: "POST",
         body: JSON.stringify({
-          post_id
+          post_id,
         }),
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
       });
       const response = await request.json();
       if ((await response.status) == 201) {
         count = count + 1;
-        lp.style.color = 'green';
+        lp.style.color = "green";
       } else if ((await response.status) == 403) {
         alert("Please login to make an action on post");
       } else {
         count = count - 1;
-        lp.style.color = '#003';
+        lp.style.color = "#003";
       }
       document.getElementById(
         "lp"
