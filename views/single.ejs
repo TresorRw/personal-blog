@@ -137,6 +137,7 @@
       commentSection.innerHTML = '';
       const allComments = await fetchAllArticlesComment(post_id);
       const comments = await allComments.comments;
+      console.log(await comments);
       comments.map((com, inx) => {
         commentSection.innerHTML += `
         <div class="comment">
