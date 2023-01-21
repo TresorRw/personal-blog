@@ -416,6 +416,34 @@ module.exports.getLikes = async (req, res) => {
     console.log(err);
   }
 }
+module.exports.getdisLikes = async (req, res) => {
+  // fetching from mongo
+  const {
+    post
+  } = req.query;
+  try {
+    const results = await Dislike.find({
+      postID: post
+    });
+    if (results.length == 0) {
+      res.status(404).json({
+        status: 404,
+        message: "No Likes"
+      });
+    } else {
+      res
+        .status(200)
+        .json({
+          status: 200,
+          message: "All Liked post",
+          results
+        });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 module.exports.getComments = async (req, res) => {
   const {
     post
