@@ -87,7 +87,8 @@
       let random = Math.floor(Math.random() * renderedPosts.length);
       let blogInfo = renderedPosts[random];
       let allLikes = await fetchAllArticlesLikes(blogInfo._id);
-      console.log(await allLikes);
+      let found = allLikes.results.filter((el, inx) => el.userID == loggedUserID);
+      console.log(found);
       let allComments = await fetchAllArticlesComment(blogInfo._id);
       if (await allLikes.results) {
         count = await allLikes.results.length;
