@@ -201,7 +201,8 @@
     const likePost = async (post_id, disliked) => {
       const post = post_id;
       if (isDisliked == true) {
-        console.log('II found a like. am going to remove it then like the post')
+        actualDislikeAction(post_id);
+        actualLikeAction(post_id);
       } else {
         actualLikeAction(post_id);
       }
@@ -210,9 +211,10 @@
     const dislikePost = async (post_id, liked) => {
       const post = post_id;
       if(isLiked == true) {
-        console.log('I can not like directly i have to remove your like then after dislike it again ');
+        actualLikeAction(post_id);
+        actualDislikeAction(post_id);
       } else {
-        console.log('Oooooh, good to disliek this post');
+        actualDislikeAction(post_id);
       }
     };
   </script>
