@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const Comment = require("../models/commentModel");
 const Like = require("../models/likeModel");
+const dislike = require('../models/dislikeModel')
 const Message = require("../models/messageModel");
 const Post = require("../models/postModel");
 const Profile = require("../models/profileModel");
