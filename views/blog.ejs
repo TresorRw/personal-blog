@@ -123,6 +123,7 @@
                       </div>
                     </div>`;
       let lp = document.getElementById("lp");
+      let dp = document.getElementById("dp");
       if (isLiked) {
         lp.style.color = "green";
       }
@@ -177,7 +178,18 @@
         },
       });
       const response = await request.json();
-      console.log(await response);
+      if ((await response.status) == 201) {
+        count = count + 1;
+        dp.style.color = "red";
+      } else if ((await response.status) == 403) {
+        alert("Please login to make an action on post");
+      } else {
+        count = count - 1;
+        dp.style.color = "#003";
+      }
+      document.getElementById(
+        "dp"
+      ).innerHTML = `<i class="fa-regular fa-thumbs-up"></i> ${count}`;
     };
   </script>
 </body>
