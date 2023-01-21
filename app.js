@@ -56,6 +56,7 @@ app.get("/allArticles", authUser, (req, res) => res.render("allArticles"));
 app.get("/blog", (req, res) => res.render("blog"));
 app.get("/logout", (req, res) => {
   res.cookie("pbtkn", "", { maxAge: 0 });
+  res.cookie("uipidky", "", {maxAge: 0})
   res.redirect("/");
 });
 app.use(appRoutes);
