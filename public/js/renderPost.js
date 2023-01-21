@@ -40,6 +40,20 @@ async function fetchAllArticlesLikes(post) {
     console.log(error);
   }
 }
+async function fetchAllArticlesDisLikes(post) {
+  try {
+    const request = await fetch(`/getAllPostsdisLikes?post=${post}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const response = await request.json();
+    return await response;
+  } catch (error) {
+    console.log(error);
+  }
+}
 async function fetchAllArticlesComment(post) {
   try {
     const request = await fetch(`/getAllComments?post=${post}`, {
