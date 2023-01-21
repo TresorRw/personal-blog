@@ -93,11 +93,7 @@
       if (await allLikes.results) {
         count = await allLikes.results.length;
         let found = await allLikes.results.filter((el, inx) => el.userID == loggedUserID)[0];
-        if (found != "") {
-          isLiked = true;
-        } else {
-          isLiked = false;
-        }
+        isLiked = (found != '')? true:false;
       } else {
         count = 0;
       }
@@ -140,6 +136,32 @@
     const likePost = async (post_id) => {
       const post = post_id;
       const request = await fetch("/like", {
+        method: "POST",
+        body: JSON.stringify({
+          post_id,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const response = await request.json();
+      if ((await response.status) == 201) {
+        count = count + 1;
+        lp.style.color = "green";
+      } else if ((await response.status) == 403) {
+        alert("Please login to make an action on post");
+      } else {
+        count = count - 1;
+        lp.style.color = "#003";
+      }
+      document.getElementById(
+        "lp"
+      ).innerHTML = `<i class="fa-regular fa-thumbs-up"></i> ${count}`;
+    };
+
+    const dislikePost = async (post_id) => {
+      const post = post_id;
+      const request = await fetch("/dislike", {
         method: "POST",
         body: JSON.stringify({
           post_id,
