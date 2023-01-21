@@ -83,7 +83,7 @@
       return "";
     }
     const loggedUserID = getCookie("uipidky");
-    let isLiked;
+    let isLiked, isDisliked;
     document.addEventListener("DOMContentLoaded", async (e) => {
       let renderedPosts = await fetchAllArticles();
       let random = Math.floor(Math.random() * renderedPosts.length);
@@ -92,6 +92,8 @@
       let allDisLikes = await fetchAllArticlesDisLikes(blogInfo._id);
       if(await allDisLikes.results) {
         countDis = allDisLikes.results.length;
+        let foundDislikes = await allDisLikes.results.filter((el, inx) => el.userID == loggedUserID)[0];
+        isDisliked = (foundDislikes != '')? true:false;
       } else {
         countDis = 0;
       }
@@ -126,6 +128,9 @@
       let dp = document.getElementById("dp");
       if (isLiked) {
         lp.style.color = "green";
+      }
+      if(isDisliked) {
+        dp.style.color = '#f00';
       }
       small_pst.innerHTML = "";
       for (let i = 0; i < renderedPosts.length; i++) {
