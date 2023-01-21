@@ -159,6 +159,19 @@
        }
       })
     }
+  
+    const deleteComment = async (com) => {
+      post = com;
+      let decision = confirm("You really want to delete the comment?");
+      if(decision = true){
+        const delRequest = await fetch('/comment', {
+          method: "DELETE",
+          body: JSON.stringify({post}),
+          headers:{'Content-Type': 'application/json'}
+        });
+        const response = delRequest.json();
+      }
+    }
   </script>
 </body>
 </html>
