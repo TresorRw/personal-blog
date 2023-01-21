@@ -462,7 +462,8 @@ module.exports.getComments = async (req, res) => {
     }
     rs.map(async (ev, ix) => {
       resAll.push({
-        names: ev.username
+        names: ev.username,
+        user: ev._id
       });
     });
     for (let i = 0; i < await resultsComments.length; i++) {
