@@ -108,7 +108,6 @@
     let commentSection = document.getElementById('cms')
     const comForm = document.getElementById("commentForm");
     const loggedInUserID = getCookie('uipidky');
-    console.log(loggedInUserID);
     comForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const postid = comForm.post.value;
@@ -142,12 +141,21 @@
       const comments = await allComments.comments;
       console.log(await comments);
       comments.map((com, inx) => {
+       if(com.user == loggedInUserID) {
+        commentSection.innerHTML += `
+        <div class="comment">
+            <h6><i class="fa-solid fa-user"></i> ${com.names}</h6> <a>edit || Delete</a>
+            <p>${com.message}</p>
+          </div>
+        `;
+       } else{
         commentSection.innerHTML += `
         <div class="comment">
             <h6><i class="fa-solid fa-user"></i> ${com.names}</h6>
             <p>${com.message}</p>
           </div>
         `;
+       }
       })
     }
   </script>
