@@ -121,6 +121,8 @@
           "Content-Type": "application/json",
         },
       });
+      const loggedInUserID = getCookie('uipiky');
+      console(loggedInUserID);
       const response = await request.json();
       document.querySelector(".log").innerHTML = await response.message;
       if ((await response.status) == 201) {
