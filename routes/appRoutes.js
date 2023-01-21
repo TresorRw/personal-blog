@@ -506,7 +506,8 @@ router.post("/comment", allowUser, routesController.comment_post);
 router.get("/getAllPostsLikes", routesController.getLikes);
 router.get("/getAllPostsdisLikes", routesController.getdisLikes);
 router.get("/getAllComments", routesController.getComments);
-
+router.delete("/comment", routesController.deleteComment);
+router.patch("/comment", routesController.editComment);
 /* Modification on posts */
 // Deleting
 router.delete("/delete", authUser, routesController.deletePost);
