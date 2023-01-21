@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const Comment = require("../models/commentModel");
 const Like = require("../models/likeModel");
-const dislike = require('../models/dislikeModel')
+const Dislike = require('../models/dislikeModel')
 const Message = require("../models/messageModel");
 const Post = require("../models/postModel");
 const Profile = require("../models/profileModel");
@@ -316,6 +316,79 @@ module.exports.like_post = async (req, res) => {
     });
   }
 };
+// Disliking
+module.exports.dislike_post = async (req, res) => {
+  const {
+    post_id
+  } = req.body;
+  const u_id = req.cookies.pbtkn;
+  try {
+    const checkAv = await Post.findOne({
+      _id: post_id
+    });
+    const result = await checkAv;
+    jwt.verify(u_id, "personal-brand-app", async (err, decodedToken) => {
+      if (err) {
+        res.status(400).json({
+          status: 400,
+          message: "Bad request",
+          err
+        });
+      } else {
+        const user_id = decodedToken.id;
+        const date = new Date();
+        const likeDate = date.toDateString() + " " + date.toLocaleTimeString();
+
+        const newdisLike = {
+          postID: post_id,
+          userID: user_id,
+          dislikeDate,
+        };
+        // Checking if like exists and delete it
+        const check = await Dislike.findOne({
+          postID: post_id,
+          userID: user_id
+        });
+        const t = await check;
+        if (t == null) {
+          const saveLike = await Dislike.create(newLike);
+          res
+            .status(201)
+            .json({
+              status: 201,
+              message: "Your dislike added successfully",
+              info: [saveLike],
+            });
+        } else {
+          const likeID = t._id;
+          try {
+            const deleteLike = await Dislike.deleteOne({
+              _id: likeID
+            });
+            const result = await deleteLike;
+            res
+              .status(200)
+              .json({
+                status: 200,
+                message: "Your reaction Saved."
+              });
+          } catch (errr) {
+            res.status(400).json({
+              errr
+            });
+          }
+        }
+      }
+    });
+  } catch (er) {
+    res.status(400).json({
+      status: 400,
+      message: "Invalid post id"
+    });
+  }
+};
+
+
 module.exports.getLikes = async (req, res) => {
   // fetching from mongo
   const {
@@ -559,7 +632,9 @@ module.exports.sendQuery = async (req, res) => {
 // Viewing all queries
 module.exports.viewMessages = async (req, res) => {
   try {
-    const msgs = await Message.find().sort({messageDate: -1}).limit(5);
+    const msgs = await Message.find().sort({
+      messageDate: -1
+    }).limit(5);
     res.status(200).json({
       status: 200,
       message: "All visitor's messages.",
