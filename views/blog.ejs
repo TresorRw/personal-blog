@@ -89,7 +89,7 @@
       let random = Math.floor(Math.random() * renderedPosts.length);
       let blogInfo = renderedPosts[random];
       let allLikes = await fetchAllArticlesLikes(blogInfo._id);
-      if (allLikes.results) {
+      if (await allLikes.results) {
         let found = await allLikes.results.filter((el, inx) => el.userID == loggedUserID)[0];
         if (found != "") {
           isLiked = true;
