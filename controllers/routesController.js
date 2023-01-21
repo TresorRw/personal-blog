@@ -468,6 +468,7 @@ module.exports.getComments = async (req, res) => {
     });
     for (let i = 0; i < await resultsComments.length; i++) {
       resAll[i].message = await resultsComments[i].commentText;
+      resAll[i].og = await resultsComments[i]._id;
     }
     res.status(200).json({
       status: 200,
