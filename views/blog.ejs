@@ -83,17 +83,18 @@
       return "";
     }
     const loggedUserID = getCookie("uipidky");
-    let isLiked = false, isDisliked = false;
+    let isLiked = false,
+      isDisliked = false;
     document.addEventListener("DOMContentLoaded", async (e) => {
       let renderedPosts = await fetchAllArticles();
       let random = Math.floor(Math.random() * renderedPosts.length);
       let blogInfo = renderedPosts[random];
       let allLikes = await fetchAllArticlesLikes(blogInfo._id);
       let allDisLikes = await fetchAllArticlesDisLikes(blogInfo._id);
-      if(await allDisLikes.results) {
+      if (await allDisLikes.results) {
         countDis = allDisLikes.results.length;
         let foundDislikes = await allDisLikes.results.filter((el, inx) => el.userID == loggedUserID)[0];
-        isDisliked = (foundDislikes != '')? true:false;
+        isDisliked = (foundDislikes != '') ? true : false;
       } else {
         countDis = 0;
       }
@@ -101,7 +102,7 @@
       if (await allLikes.results) {
         count = await allLikes.results.length;
         let found = await allLikes.results.filter((el, inx) => el.userID == loggedUserID)[0];
-        isLiked = (found != '')? true:false;
+        isLiked = (found != '') ? true : false;
       } else {
         count = 0;
       }
@@ -129,7 +130,7 @@
       if (isLiked) {
         lp.style.color = "green";
       }
-      if(isDisliked) {
+      if (isDisliked) {
         dp.style.color = '#f00';
       }
       small_pst.innerHTML = "";
@@ -145,17 +146,31 @@
     });
   </script>
   <script>
-    const likePost = async (post_id, disliked) => {
-      const post = post_id;
-      if(disliked == true) {
-        console.log('II found a like. am going to remove it then like the post')
+    const actualLikeAction = async (post_id) => {
+      const request = await fetch("/like", {
+        method: "POST",
+        body: JSON.stringify({
+          post_id,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const response = await request.json();
+      if ((await response.status) == 201) {
+        count = count + 1;
+        lp.style.color = "green";
+      } else if ((await response.status) == 403) {
+        alert("Please login to make an action on post");
       } else {
-        console.log('Oooooh, you are good to go and like your post');
+        count = count - 1;
+        lp.style.color = "#003";
       }
-    };
-
-    const dislikePost = async (post_id) => {
-      const post = post_id;
+      document.getElementById(
+        "lp"
+      ).innerHTML = `<i class="fa-regular fa-thumbs-up"></i> ${count}`;
+    }
+    const actualDislikeAction = async (post_id) => {
       const request = await fetch("/dislike", {
         method: "POST",
         body: JSON.stringify({
@@ -178,6 +193,23 @@
       document.getElementById(
         "dp"
       ).innerHTML = `<i class="fa-regular fa-thumbs-up"></i> ${countDis}`;
+    }
+    const likePost = async (post_id, disliked) => {
+      const post = post_id;
+      if (disliked == true) {
+        console.log('II found a like. am going to remove it then like the post')
+      } else {
+        actualLikeAction(post_id);
+      }
+    };
+
+    const dislikePost = async (post_id, liked) => {
+      const post = post_id;
+      if(liked == true) {
+        console.log('I can not like directly i have to remove your like then after dislike it again ');
+      } else {
+        console.log('Oooooh, good to disliek this post');
+      }
     };
   </script>
 </body>
