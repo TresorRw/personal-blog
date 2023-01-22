@@ -106,7 +106,7 @@
                           <a id="lp" onclick="likePost('${blogInfo._id}', ${isDisliked})" dataid = "${blogInfo._id}"class="like"><i class="fa-regular fa-thumbs-up"></i> ${count}</a>
                           <a id="dp" onclick="dislikePost('${blogInfo._id}', ${isLiked})" dataid = "${blogInfo._id}"class="dislike"><i class="fa-regular fa-thumbs-down"></i> ${countDis}</a>
                           <a id="comment"><i class="fa-regular fa-message"></i> ${countComs}</a>
-                          <a class="like" onclick="sharePost()"><i class="fa-regular fa-share-from-square"></i></a>
+                          <a class="like" onclick="sharePost('${blogInfo._id}')"><i class="fa-regular fa-share-from-square"></i></a>
                       </div>
                     </div>`;
       let lp = document.getElementById("lp");
@@ -182,8 +182,8 @@
         "dp"
       ).innerHTML = `<i class="fa-regular fa-thumbs-up"></i> ${countDis}`;
     }
-    const sharePost = () => {
-      const url = window.location.href;
+    const sharePost = (post) => {
+      const url = window.location.origin + `/single?post=${post}`;
       navigator.clipboard.writeText(url);
     }
     const likePost = async (post_id, disliked) => {
