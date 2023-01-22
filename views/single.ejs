@@ -179,10 +179,20 @@
       comForm.innerHTML = `
             <input type="hidden" name="comID" id="comID" value="${comment_id}"/>
             <input type="text" name="txt2" id="comu" required value="${commentTxt}" placeholder="Put new comment" />
-            <button type="button">
+            <button type="button" id="updateComment">
               save
             </button>
       `;
+      const updateComment = document.querySelector('#updateComment');
+      updateComment.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const newCom = document.querySelector('#comu');
+        if(newCom.value != '') {
+          console.log(comment_id, commentTxt, newCom.value);
+        } else {
+          document.querySelector(".log").innerHTML = "Please fill new comment";
+        }
+      });
       
     }
   </script>
