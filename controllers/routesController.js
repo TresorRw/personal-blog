@@ -774,5 +774,36 @@ module.exports.deleteComment = async (req, res) => {
 };
 
 module.exports.editComment = async (req, res) => {
-  console.log('hello');
-}
+  const {
+    newComment
+  } = req.body;
+  const comment = req.query.comment;
+  if (comment) {
+    if (!newComment) {
+      res
+        .status(400)
+        .json({
+          status: 400,
+          message: "Please provide new comment ",
+        });
+    } else {
+      const check = await Comment.findOne({
+        _id: comment
+      });
+      const update = await check.updateOne({
+        commentText: newComment,
+      });
+      res.status(202).json({
+        status: 202,
+        message: "Comment updated!"
+      });
+    }
+  } else {
+    res
+      .status(400)
+      .json({
+        status: 400,
+        message: "Invalid comment id or is missing."
+      });
+  }
+};
