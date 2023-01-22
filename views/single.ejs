@@ -176,20 +176,13 @@
       const commentTxt = comment.attributes.ctxt.nodeValue;
       comForm.setAttribute('id', 'updateCommentForm');
       comForm.innerHTML = `
-            <input type="hidden" name="post" id="postId" value="${post_id}" />
             <input type="hidden" name="comID" id="comID" value="${comment_id}"/>
-            <input type="text" name="txt" id="com" required value="${commentTxt}" placeholder="Put new comment" />
-            <button type="submit">
+            <input type="text" name="txt2" id="comu" required value="${commentTxt}" placeholder="Put new comment" />
+            <button type="button">
               save
             </button>
       `;
-      const updateComment = document.querySelector('#updateCommentForm');
-      updateComment.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const comId = updateComment.comID.value;
-        const com = updateComment.txt.value;
-        console.log(comId, com);
-      })
+      
     }
   </script>
 </body>
