@@ -190,8 +190,11 @@
           console.log(comment_id, commentTxt, newCom.value);
           const request = await fetch(`/comment?comment=${comment_id}`, {
             method: "PATCH",
-            body: JSON.stringify({})
+            body: JSON.stringify({newComment: newCom.value}),
+            headers: {'Content-Type': 'application/json'}
           })
+          const response = await request.json();
+          console.log(await response);
         } else {
           document.querySelector(".log").innerHTML = "Please fill new comment";
         }
