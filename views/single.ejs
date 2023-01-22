@@ -188,6 +188,10 @@
         const newCom = document.querySelector('#comu');
         if(newCom.value != '') {
           console.log(comment_id, commentTxt, newCom.value);
+          const request = await fetch(`/comment?comment=${comment_id}`, {
+            method: "PATCH",
+            body: JSON.stringify({})
+          })
         } else {
           document.querySelector(".log").innerHTML = "Please fill new comment";
         }
