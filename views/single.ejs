@@ -137,7 +137,6 @@
       commentSection.innerHTML = '';
       const allComments = await fetchAllArticlesComment(post_id);
       const comments = await allComments.comments;
-      console.log(await comments);
       comments.map((com, inx) => {
        if(com.user == loggedInUserID) {
         commentSection.innerHTML += `
@@ -187,7 +186,6 @@
         e.preventDefault();
         const newCom = document.querySelector('#comu');
         if(newCom.value != '') {
-          console.log(comment_id, commentTxt, newCom.value);
           const request = await fetch(`/comment?comment=${comment_id}`, {
             method: "PATCH",
             body: JSON.stringify({newComment: newCom.value}),
