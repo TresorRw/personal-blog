@@ -195,7 +195,7 @@
             headers: {'Content-Type': 'application/json'}
           })
           const response = await request.json();
-          console.log(await response);
+          displayComments();
         } else {
           document.querySelector(".log").innerHTML = "Please fill new comment";
         }
