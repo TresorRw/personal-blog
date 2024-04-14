@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 const cp = require("cookie-parser");
 const appRoutes = require("./routes/appRoutes");
 const { authUser } = require("./middleware/userStatus");
-const swaggerUI = require('swagger-ui-express');
-const swaggerJsDoc = require('swagger-jsdoc');
-const dotenv = require('dotenv').config();
+const swaggerUI = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
+const dotenv = require("dotenv").config();
 /*
 Servers
 https://tresor-blog.up.railway.app/ 
@@ -17,20 +17,21 @@ const options = {
     info: {
       title: "MY Personal Blog",
       version: "2.0.0",
-      description: "This is my simple personal blog that allows me to post articles to share them with community to understand their opinion."
-    }, 
+      description:
+        "This is my simple personal blog that allows me to post articles to share them with community to understand their opinion.",
+    },
     servers: [
       {
-        url: process.env.DOC_SERVER
-      }
-    ]
+        url: process.env.DOC_SERVER,
+      },
+    ],
   },
-  apis: ["./routes/*.js"]
-}
-const specs = swaggerJsDoc(options)
+  apis: ["./routes/*.js"],
+};
+const specs = swaggerJsDoc(options);
 
 const app = express();
-app.use('/docs', swaggerUI.serve, swaggerUI.setup(specs))
+app.use("/docs", swaggerUI.serve, swaggerUI.setup(specs));
 
 // Configuring middlewares
 app.use(express.json());
@@ -41,13 +42,14 @@ app.use(cp());
 app.set("view engine", "ejs");
 
 mongoose
-  .connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("Database connected");
+    app.listen(process.env.PORT || 5000, () => {
+      console.log(`Server is running on port ${process.env.PORT || 5000}`);
+    });
   })
-  .then((result) => app.listen(process.env.PORT || 5000))
-  .catch((err) => "Invalid connection string");
+  .catch((err) => console.log(err));
 
 // Routes
 app.get("/", (req, res) => res.render("index"));
@@ -56,7 +58,7 @@ app.get("/allArticles", authUser, (req, res) => res.render("allArticles"));
 app.get("/blog", (req, res) => res.render("blog"));
 app.get("/logout", (req, res) => {
   res.cookie("pbtkn", "", { maxAge: 0 });
-  res.cookie("uipidky", "", {maxAge: 0})
+  res.cookie("uipidky", "", { maxAge: 0 });
   res.redirect("/");
 });
 app.use(appRoutes);

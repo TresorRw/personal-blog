@@ -4,30 +4,31 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
-    "bcrypt": "^5.1.0",
-    "chai": "^4.3.7",
-    "chai-http": "^4.3.0",
+    "bcrypt": "^5.1.1",
+    "chai": "^5.1.0",
+    "chai-http": "^4.4.0",
     "cookie-parser": "^1.4.6",
-    "dotenv": "^16.0.3",
-    "ejs": "^3.1.3",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.0",
-    "mocha": "^10.2.0",
-    "mongoose": "^5.9.23",
-    "node-mocks-http": "^1.12.1",
-    "swagger-jsdoc": "^6.2.7",
-    "swagger-ui-express": "^4.1.2",
-    "validator": "^13.7.0"
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mocha": "^10.4.0",
+    "mongoose": "^8.3.1",
+    "node-mocks-http": "^1.14.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
+    "validator": "^13.11.0"
   },
   "scripts": {
     "start": "node app.js",
-    "test": "nyc mocha"
+    "test": "nyc mocha",
+    "format": "npx prettier --write ."
   },
   "keywords": [],
   "author": "CYUSA Alain Tresor",
   "license": "ISC",
   "devDependencies": {
     "nyc": "^15.1.0",
-    "prettier": "^2.8.1"
+    "prettier": "^3.2.5"
   }
 }

@@ -47,9 +47,8 @@ blogForm.addEventListener("submit", async (e) => {
     const response = await request.json();
     if (response.message) {
       document.querySelector("#logsms").style.color = "green";
-      document.querySelector(
-        "#logsms"
-      ).innerHTML = `${response.message} close the modal`;
+      document.querySelector("#logsms").innerHTML =
+        `${response.message} close the modal`;
       stst.innerHTML = `<i class="fa-solid fa-check"></i>`;
       setTimeout(() => {
         blogForm.title.value = "";

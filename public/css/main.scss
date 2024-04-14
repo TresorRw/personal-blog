@@ -833,7 +833,6 @@ form a {
   }
 }
 
-
 @media screen and (max-width: 1060px) {
   .main-page #contact {
     background-image: unset !important;
@@ -980,7 +979,8 @@ form a {
     }
   }
 
-  li,ul {
+  li,
+  ul {
     display: none !important;
   }
 
@@ -999,7 +999,8 @@ form a {
   }
 
   .singleView {
-    .blogContent,.blogComment {
+    .blogContent,
+    .blogComment {
       width: 90% !important;
       img {
         width: 100% !important;

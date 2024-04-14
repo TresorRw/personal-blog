@@ -1,12 +1,15 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/TresorRw/personal-blog)
 
 # Personal Blog Backend
+
 This repository contains the backend part for the personal blog front-end part deployed before this one.
 
-## Usage 
+## Usage
+
 Use the package manager [npm](https://www.npmjs.com/) to install
+
 ```bash
-# Install the packages listed in package.json 
+# Install the packages listed in package.json
 npm install
 ```
 
@@ -26,9 +29,11 @@ nodemon app
 ```
 
 ### Dependencies
+
 This project was made using various modules listed as follows:
 
 Dependencies
+
 - [bcrypt](https://www.npmjs.com/package/bcrypt)
 - [chai](https://www.npmjs.com/package/chai)
 - [chai-http](https://www.npmjs.com/package/chai-http)
@@ -44,8 +49,10 @@ Dependencies
 - [validator](https://www.npmjs.com/package/validator)
 
 DevDependencies:
+
 - [nyc](https://www.npmjs.com/package/nyc)
 - [prettier](https://www.npmjs.com/package/prettier)
+
 #### Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

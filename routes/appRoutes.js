@@ -143,7 +143,7 @@ const router = Router();
 /**
  * @swagger
  * tags:
- *  name: Blogs 
+ *  name: Blogs
  *  description: All blog endpoints
  */
 
@@ -151,15 +151,15 @@ const router = Router();
 /**
  * @swagger
  * tags:
- *  name: Queries 
- *  description: Endpoints for sending messages and view them 
+ *  name: Queries
+ *  description: Endpoints for sending messages and view them
  */
 // Tag user action
 /**
  * @swagger
  * tags:
- *  name: User Actions 
- *  description: Liking, commenting and profile 
+ *  name: User Actions
+ *  description: Liking, commenting and profile
  */
 
 /* User management */
@@ -190,7 +190,7 @@ const router = Router();
  *                  application/json:
  *                      schema:
  *                          $ref: '#/components/schemas/User'
- *              
+ *
  */
 
 // Sign in
@@ -218,7 +218,7 @@ const router = Router();
  *              content:
  *                  application/json:
  *                      schema:
- *                          $ref: '#/components/schemas/LogUser'           
+ *                          $ref: '#/components/schemas/LogUser'
  */
 
 // Logout
@@ -241,18 +241,18 @@ const router = Router();
  *      summary: Adding New Post
  *      requestBody:
  *          required: true
- *          content: 
+ *          content:
  *              application/json:
  *                  schema:
  *                      $ref: '#/components/schemas/Blog'
  *      responses:
  *          201:
  *              description: Your blog is saved!
- *              content: 
+ *              content:
  *                  application/json:
  *                      schema:
  *                          $ref: '#/components/schemas/Blog'
- *          400: 
+ *          400:
  *              description: Please review your inputs
  *          403:
  *              description: You do not have permissions
@@ -268,7 +268,7 @@ const router = Router();
  *      responses:
  *          200:
  *              description: the list of saved posts
- *              content: 
+ *              content:
  *                  application/json:
  *                      schema:
  *                          type: array
@@ -276,9 +276,9 @@ const router = Router();
  *                              $ref: '#components/schemas/Blog'
  *          404:
  *              description: No post found
- */ 
+ */
 
-// Single post 
+// Single post
 /**
  * @swagger
  * /singlePost:
@@ -288,14 +288,14 @@ const router = Router();
  *      parameters:
  *          - in: query
  *            name: post
- *            schema: 
+ *            schema:
  *                  type: string
  *            description: Post ID
- *            required: true  
+ *            required: true
  *      responses:
  *          200:
  *              description: Single post by ID
- *              content: 
+ *              content:
  *                  application/json:
  *                      schema:
  *                          type: array
@@ -321,10 +321,10 @@ const router = Router();
  *      parameters:
  *          - in: query
  *            name: post
- *            schema: 
+ *            schema:
  *                  type: string
  *            description: Post ID
- *            required: true  
+ *            required: true
  *      responses:
  *          202:
  *              description: Resource updated
@@ -344,24 +344,24 @@ const router = Router();
 
 // Deleting
 /**
- * @swagger 
+ * @swagger
  * /delete:
  *  delete:
  *      tags: [Blogs]
  *      summary: Delete post by ID
- *      requestBody: 
+ *      requestBody:
  *          required: true,
- *          content: 
+ *          content:
  *              application/json:
- *                  schema: 
+ *                  schema:
  *                      $ref: '#/components/schemas/Blog'
  *      responses:
  *          202:
  *              description: Post deleted
  *          400:
  *              description: Something went wrong
- *              content: 
- *                  application/json:     
+ *              content:
+ *                  application/json:
  *                      schema:
  *                          $ref: '#/components/schemas/Blog'
  */
@@ -419,18 +419,18 @@ const router = Router();
  *      summary: Sending a message
  *      requestBody:
  *          required: true
- *          content: 
+ *          content:
  *              application/json:
  *                  schema:
  *                      $ref: '#/components/schemas/Messages'
  *      responses:
  *          200:
  *              description: Your message is sent!
- *              content: 
+ *              content:
  *                  application/json:
  *                      schema:
  *                          $ref: '#/components/schemas/Messages'
- *          400: 
+ *          400:
  *              description: Please review your inputs
  */
 
@@ -441,7 +441,7 @@ const router = Router();
  *  get:
  *      tags: [Queries]
  *      summary: Admin endpoint for checking messages
- *      responses: 
+ *      responses:
  *          200:
  *              description: All the messages
  *          400:
@@ -459,9 +459,9 @@ const router = Router();
  *      responses:
  *          200:
  *              description: Saved admin profile
- *          400: 
+ *          400:
  *              description: Invalid request
- *               
+ *
  */
 
 // Saving profile
@@ -478,13 +478,13 @@ const router = Router();
  *                  schema:
  *                      $ref: '#/components/schemas/Admin Profile'
  *      responses:
- *          201: 
+ *          201:
  *              description: Admin Profile
- *          400: 
+ *          400:
  *              description: Invalid request or errors
  *          403:
  *              description: Insufficient permissions
- *          
+ *
  */
 
 router.get("/signup", routesController.signup_get);
@@ -496,8 +496,8 @@ router.get("/single", routesController.singleView);
 router.get("/singlePost", routesController.single);
 
 // Profile
-router.get('/profile', routesController.profile);
-router.post('/profile', authUser, routesController.saveProfile);
+router.get("/profile", routesController.profile);
+router.post("/profile", authUser, routesController.saveProfile);
 
 // liking and commenting
 router.post("/like", allowUser, routesController.like_post);
@@ -518,6 +518,6 @@ router.patch("/update", authUser, routesController.updatePost);
  */
 // Sending
 router.post("/inquiry", routesController.sendQuery);
-router.get('/viewMessages', authUser, routesController.viewMessages);
+router.get("/viewMessages", authUser, routesController.viewMessages);
 
 module.exports = router;

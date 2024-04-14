@@ -308,7 +308,7 @@ header ul li a:hover {
   width: 10px;
   height: 10px;
   -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   margin: 5px 10px 5px 0;
   border-radius: 50%;
 }
@@ -561,10 +561,12 @@ nav .userProfile {
   border-radius: 5px;
   margin: 10px 0;
 }
-#admin .sidebar ul li:hover, #admin .sidebar ul li.active {
+#admin .sidebar ul li:hover,
+#admin .sidebar ul li.active {
   background-color: #fff;
 }
-#admin .sidebar ul li:hover a, #admin .sidebar ul li.active a {
+#admin .sidebar ul li:hover a,
+#admin .sidebar ul li.active a {
   color: var(--color-bg);
 }
 #admin .sidebar ul li a {
@@ -795,7 +797,7 @@ form a {
     font-size: 2em !important;
   }
   .main-page #contact .skills,
-.main-page #contact .boadrs {
+  .main-page #contact .boadrs {
     margin-top: 2em !important;
     width: 100% !important;
   }
@@ -808,19 +810,19 @@ form a {
     margin: 0 !important;
   }
   #sign-in,
-#contact {
+  #contact {
     background-image: unset !important;
   }
   #sign-in .boadrs {
     width: 50%;
   }
   #sign-in .boadrs h2,
-#sign-in .boadrs h1 {
+  #sign-in .boadrs h1 {
     font-size: 2em !important;
   }
   #sign-in .boadrs h1,
-#sign-in .boadrs p,
-#sign-in .boadrs h2 {
+  #sign-in .boadrs p,
+  #sign-in .boadrs h2 {
     color: var(--color-bg) !important;
   }
   .btn-login {
@@ -841,22 +843,22 @@ form a {
     text-align: center !important;
   }
   #why,
-#who-am-i {
+  #who-am-i {
     display: flex !important;
     justify-content: center !important;
     align-items: center !important;
     flex-direction: column !important;
   }
   #why .bg_image,
-#who-am-i .bg_image {
+  #who-am-i .bg_image {
     width: 60% !important;
   }
   #why .skills,
-#who-am-i .skills {
+  #who-am-i .skills {
     width: 50% !important;
   }
   #why .boadrs,
-#who-am-i .boadrs {
+  #who-am-i .boadrs {
     margin-top: 5%;
   }
 }
@@ -869,25 +871,25 @@ form a {
     background-color: var(--color-bg) !important;
   }
   #why,
-#sign-in {
+  #sign-in {
     display: block !important;
   }
   #why .skills,
-#why .boadrs,
-#sign-in .skills,
-#sign-in .boadrs {
+  #why .boadrs,
+  #sign-in .skills,
+  #sign-in .boadrs {
     width: 100% !important;
   }
   #why .skills .progress,
-#sign-in .skills .progress {
+  #sign-in .skills .progress {
     width: 100% !important;
   }
   #why .boadrs .board,
-#sign-in .boadrs .board {
+  #sign-in .boadrs .board {
     width: 40% !important;
   }
   #why .boadrs .board h2,
-#sign-in .boadrs .board h2 {
+  #sign-in .boadrs .board h2 {
     font-size: 1.2em !important;
   }
   #sign-in .skills {
@@ -906,7 +908,8 @@ form a {
   #sign-in .boadrs .btn-login {
     margin: 0 !important;
   }
-  li, ul {
+  li,
+  ul {
     display: none !important;
   }
   .togglerIcon {
@@ -920,10 +923,12 @@ form a {
   .main-page .blog img {
     width: 80% !important;
   }
-  .singleView .blogContent, .singleView .blogComment {
+  .singleView .blogContent,
+  .singleView .blogComment {
     width: 90% !important;
   }
-  .singleView .blogContent img, .singleView .blogComment img {
+  .singleView .blogContent img,
+  .singleView .blogComment img {
     width: 100% !important;
   }
   #posts .card {
@@ -962,7 +967,7 @@ form a {
     height: auto !important;
   }
   #main .bg_image,
-#main .bg_info {
+  #main .bg_info {
     width: 100% !important;
   }
   #main h3 {
@@ -971,4 +976,4 @@ form a {
   #who-am-i {
     display: block !important;
   }
-}/*# sourceMappingURL=main.css.map */
+} /*# sourceMappingURL=main.css.map */

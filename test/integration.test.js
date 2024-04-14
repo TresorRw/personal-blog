@@ -132,7 +132,7 @@ describe("Blog Activities", () => {
       .request(app)
       .delete("/delete")
       .send({
-        "post": post_id
+        post: post_id,
       })
       .set("Cookie", `pbtkn=${token}`)
       .end((err, res) => {
@@ -142,7 +142,9 @@ describe("Blog Activities", () => {
           assert.isDefined(res.body.message);
           assert.isNotNull(res.body.message);
         } else {
-          expect(res.body.message).to.be.equal('Can not delete due to unknown post id.')
+          expect(res.body.message).to.be.equal(
+            "Can not delete due to unknown post id.",
+          );
         }
         done();
       });
@@ -150,22 +152,21 @@ describe("Blog Activities", () => {
   // Commeting and liking
 });
 
-
-describe('Messages', () => {
-  it('Sending messages', done => {
+describe("Messages", () => {
+  it("Sending messages", (done) => {
     chai
       .request(app)
-      .post('/inquiry')
+      .post("/inquiry")
       .send({
-        "names": "testUser NodeJS",
-        "email": "node@superagent.com",
-        "message": "Hello user! am node super agent."
+        names: "testUser NodeJS",
+        email: "node@superagent.com",
+        message: "Hello user! am node super agent.",
       })
       .end((err, res) => {
         if (res.body.errors) {
           assert.isDefined(res.body.errors.names);
-          assert.isDefined(res.body.errors.email)
-          assert.isDefined(res.body.errors.messageContent)
+          assert.isDefined(res.body.errors.email);
+          assert.isDefined(res.body.errors.messageContent);
         } else {
           assert.isDefined(res.body.request);
           assert.isNotEmpty(res.body.request);
@@ -173,10 +174,10 @@ describe('Messages', () => {
         done();
       });
   });
-  it('Displaying messages', done => {
+  it("Displaying messages", (done) => {
     chai
       .request(app)
-      .get('/viewMessages')
+      .get("/viewMessages")
       .set("Cookie", `pbtkn=${token}`)
       .end((err, res) => {
         if (res.body.status == 403 || res.body.status == 400) {
@@ -185,16 +186,15 @@ describe('Messages', () => {
           assert.isArray(res.body.messages);
         }
         done();
-      })
+      });
   });
 });
 
-
-describe('Profile information', () => {
-  it('Showing profile data', done => {
+describe("Profile information", () => {
+  it("Showing profile data", (done) => {
     chai
       .request(app)
-      .get('/profile')
+      .get("/profile")
       .end((err, res) => {
         if (res.body.status == 200) {
           assert.isDefined(res.body.profileInformation);
@@ -203,20 +203,20 @@ describe('Profile information', () => {
           assert.isDefined(res.body.error);
         }
         done();
-      })
+      });
   });
-  it('Saving new profile information', done => {
+  it("Saving new profile information", (done) => {
     chai
       .request(app)
-      .post('/profile')
+      .post("/profile")
       .set("Cookie", `pbtkn=${token}`)
       .send({
-        "names": "cat",
-        "profession": "Software killer",
-        "profAddress": "Rda",
-        "skills": "Web2.0",
-        "experience": "5 Years",
-        "socialMedia": "@Trw"
+        names: "cat",
+        profession: "Software killer",
+        profAddress: "Rda",
+        skills: "Web2.0",
+        experience: "5 Years",
+        socialMedia: "@Trw",
       })
       .end((err, res) => {
         if (res.status == 403) {
@@ -231,109 +231,116 @@ describe('Profile information', () => {
         done();
       });
   });
-})
+});
 
-
-describe('Like and comments', () => {
-  it('Like a post', done => {
+describe("Like and comments", () => {
+  it("Like a post", (done) => {
     chai
       .request(app)
-      .post('/like')
+      .post("/like")
       .send({
-        "post_id": post_id
+        post_id: post_id,
       })
       .set("Cookie", `pbtkn=${token}`)
       .end((err, res) => {
-        if (res.body.status == 403 || res.body.status == 400 || res.body.status == 200) {
-          assert.isDefined(res.body.message)
-          assert.isNotEmpty(res.body.message)
+        if (
+          res.body.status == 403 ||
+          res.body.status == 400 ||
+          res.body.status == 200
+        ) {
+          assert.isDefined(res.body.message);
+          assert.isNotEmpty(res.body.message);
         } else if (res.body.status == 201) {
-          assert.isDefined(res.body.info)
-          assert.isArray(res.body.info)
+          assert.isDefined(res.body.info);
+          assert.isArray(res.body.info);
         } else {
-          expect(res.body.message).to.be.equal('You disliked the post.')
-        }
-        done();
-      })
-  })
-
-  it('Comment on a post', done => {
-    chai
-      .request(app)
-      .post('/comment')
-      .send({
-        "post_id": post_id,
-        "commentText": "This node superagent comment!"
-      })
-      .set("Cookie", `pbtkn=${token}`)
-      .end((err, res) => {
-        if(res.body.status == 403 || res.body.status == 400 || res.body.status == 200) {
-          assert.isDefined(res.body.message)
-          assert.isNotEmpty(res.body.message)
-        } else if(res.body.status == 201) {
-          assert.isDefined(res.body.data)
-          assert.isArray(res.body.data)
+          expect(res.body.message).to.be.equal("You disliked the post.");
         }
         done();
       });
-  })
-})
-
-describe('Getting likes and comments for custom post', ()=>{
-  it('Getting Likes', (done)=>{
-    chai
-      .request(app)
-      .get('/getAllPostsLikes')
-      .set("Cookie", `pbtkn=${token}`)
-      .query(`post=${post_id}`)
-      .end((err, res) => {
-        if(res.status == 200){
-          assert.isDefined(res.body.results);
-          assert.isArray(res.body.results);
-        } else {
-          expect(res.body.status).to.be.equal(404)
-          assert.isNotEmpty(res.body.message);
-        }
-        done();
-      })
   });
-  it('Getting comments', (done)=>{
+
+  it("Comment on a post", (done) => {
     chai
       .request(app)
-      .get('/getAllComments')
+      .post("/comment")
+      .send({
+        post_id: post_id,
+        commentText: "This node superagent comment!",
+      })
       .set("Cookie", `pbtkn=${token}`)
-      .query(`post=${post_id}`)
       .end((err, res) => {
-        if(res.status == 200){
-          assert.isDefined(res.body.comments);
-          assert.isArray(res.body.comments);
-        } else {
-          expect(res.body.status).to.be.equal(404)
+        if (
+          res.body.status == 403 ||
+          res.body.status == 400 ||
+          res.body.status == 200
+        ) {
+          assert.isDefined(res.body.message);
           assert.isNotEmpty(res.body.message);
+        } else if (res.body.status == 201) {
+          assert.isDefined(res.body.data);
+          assert.isArray(res.body.data);
         }
         done();
-      })
+      });
   });
 });
 
-describe('Rendering post per condition', ()=> {
-  it('Render post by ID on interface', done => {
+describe("Getting likes and comments for custom post", () => {
+  it("Getting Likes", (done) => {
     chai
       .request(app)
-      .get('/single')
+      .get("/getAllPostsLikes")
+      .set("Cookie", `pbtkn=${token}`)
       .query(`post=${post_id}`)
       .end((err, res) => {
-        expect(res.type).to.be.equal('text/html');
+        if (res.status == 200) {
+          assert.isDefined(res.body.results);
+          assert.isArray(res.body.results);
+        } else {
+          expect(res.body.status).to.be.equal(404);
+          assert.isNotEmpty(res.body.message);
+        }
         done();
       });
   });
-  it('Render post', done => {
+  it("Getting comments", (done) => {
     chai
       .request(app)
-      .get('/singlePost')
+      .get("/getAllComments")
+      .set("Cookie", `pbtkn=${token}`)
       .query(`post=${post_id}`)
       .end((err, res) => {
-        if(res.body.status == 200){
+        if (res.status == 200) {
+          assert.isDefined(res.body.comments);
+          assert.isArray(res.body.comments);
+        } else {
+          expect(res.body.status).to.be.equal(404);
+          assert.isNotEmpty(res.body.message);
+        }
+        done();
+      });
+  });
+});
+
+describe("Rendering post per condition", () => {
+  it("Render post by ID on interface", (done) => {
+    chai
+      .request(app)
+      .get("/single")
+      .query(`post=${post_id}`)
+      .end((err, res) => {
+        expect(res.type).to.be.equal("text/html");
+        done();
+      });
+  });
+  it("Render post", (done) => {
+    chai
+      .request(app)
+      .get("/singlePost")
+      .query(`post=${post_id}`)
+      .end((err, res) => {
+        if (res.body.status == 200) {
           assert.isDefined(res.body.request);
         } else {
           assert.isNotEmpty(res.body.error);
@@ -343,54 +350,53 @@ describe('Rendering post per condition', ()=> {
   });
 });
 
-describe('Page redirection and rendering', () => {
-  it('"/" Render the homepage', done => {
+describe("Page redirection and rendering", () => {
+  it('"/" Render the homepage', (done) => {
     chai
       .request(app)
-      .get('/')
+      .get("/")
       .end((err, res) => {
-        expect(res.type).to.be.equal('text/html');
+        expect(res.type).to.be.equal("text/html");
         done();
       });
   });
-  it('Rendering articles page for admin', done => {
+  it("Rendering articles page for admin", (done) => {
     chai
       .request(app)
-      .get('/allArticles')
+      .get("/allArticles")
       .set("Cookie", `pbtkn=${token}`)
       .end((err, res) => {
-        if(res.status == 200) {
-          expect(res.type).to.be.equal('text/html');
+        if (res.status == 200) {
+          expect(res.type).to.be.equal("text/html");
         } else {
           assert.isDefined(res.body.message);
         }
         done();
       });
-  })
-  it('Rendering messages for admin', done => {
+  });
+  it("Rendering messages for admin", (done) => {
     chai
       .request(app)
-      .get('/dashboard')
+      .get("/dashboard")
       .set("Cookie", `pbtkn=${token}`)
       .end((err, res) => {
-        if(res.status == 200) {
-          expect(res.type).to.be.equal('text/html');
+        if (res.status == 200) {
+          expect(res.type).to.be.equal("text/html");
         } else {
           assert.isDefined(res.body.message);
         }
         done();
       });
-  })
-  it('Rendering blog page for user', done => {
+  });
+  it("Rendering blog page for user", (done) => {
     chai
       .request(app)
-      .get('/blog')
+      .get("/blog")
       .end((err, res) => {
-        expect(res.type).to.be.equal('text/html');
+        expect(res.type).to.be.equal("text/html");
         done();
       });
   });
 });
 
 // End
-
